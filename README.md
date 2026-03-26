@@ -117,9 +117,9 @@ The geopolitical dimension connects to existing critical scholarship on the glob
 
 ## About the PI
 
-**Dr. Sparrow Panton** is a professor of Practical Theology at Emmanuel College, University of Toronto, and a psychotherapist in training at the Centre for Addiction and Mental Health (CAMH). Their research sits at the intersection of Mad Studies, disability theology, and neurodivergent-informed care. Their forthcoming book *Mad Practical Theology* (September 2026) provides the foundational theoretical framework for this study.
+**Dr. Sparrow (Amy) Panton** is a professor of Practical Theology at Emmanuel College, University of Toronto, and a psychotherapist in training. Their research sits at the intersection of Mad Studies, disability theology, and neurodivergent-informed care. Their forthcoming book *Mad Practical Theology* (September 2026) provides the foundational theoretical framework for this study.
 
-Dr. Panton is queer, autistic, and disabled — this research is not about neurodivergent communities but *from within* them. The principle of **"nothing about us without us"** is not an ethical add-on but the methodological foundation.
+Sparrow is queer, autistic, ADHD, and disabled — this research is not about neurodivergent communities but emerges *from within* them. The principle of **"nothing about us without us"** is not an ethical add-on but the methodological foundation.
 
 ---
 
