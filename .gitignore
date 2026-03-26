@@ -1,0 +1,36 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model weights (too large for git)
+*.bin
+*.safetensors
+*.gguf
+models/
+
+# Training artifacts
+outputs/
+checkpoints/
+wandb/
+runs/
+
+# Data (will be released separately)
+data/*.jsonl
+data/raw/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Sensitive
+.env
+*.key
