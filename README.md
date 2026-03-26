@@ -2,7 +2,7 @@
 
 ### A Comparative Study of Language Models Fine-Tuned on Mad Theology and Disability Justice Texts
 
-**PI:** Dr. Sparrow (my) Panton | Emmanuel College, University of Toronto
+**PI:** Dr. Sparrow (Amy) Panton | Emmanuel College, University of Toronto
 **Status:** Active — Phase 1 (Setup & Baseline Testing)
 **Started:** March 2026
 
