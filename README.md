@@ -20,7 +20,7 @@ This study borrows from clinical formation pedagogy — the way therapists are t
 
 We call this **"formation, not information."**
 
-Seven open-source language models across three size tiers and four countries of origin are fine-tuned on a curated corpus of Mad Studies, disability theology, and neurodivergent-informed spiritual care texts using LoRA (Low-Rank Adaptation). All training data is original work authored by the PI — no copyrighted third-party texts are used in the training corpus.
+Ten open-source language models across three size tiers and six countries of origin are fine-tuned on a curated corpus of Mad Studies, disability theology, and neurodivergent-informed spiritual care texts using LoRA (Low-Rank Adaptation). All training data is original work authored by the PI — no copyrighted third-party texts are used in the training corpus.
 
 ## Research Questions
 
@@ -30,7 +30,7 @@ Seven open-source language models across three size tiers and four countries of 
 
 3. **Scale** — Does formation scale with model capacity? Can a phone-sized model learn the posture, or does genuine nuance require more parameters?
 
-4. **Geopolitical** — Do base models from different countries (USA, China, France) embed different cultural psychiatric norms? Does Mad Studies formation override these defaults regardless of origin?
+4. **Geopolitical** — Do base models from different countries (USA, China, France, Canada, UAE) embed different cultural psychiatric norms? Does Mad Studies formation override these defaults regardless of origin?
 
 5. **Critical Analysis** — How do base model responses align with published AI safety guidelines from OpenAI and Anthropic — and what does this reveal about the psychiatric norms embedded in current AI safety discourse?
 
@@ -52,6 +52,9 @@ The study compares models across two dimensions simultaneously: **size** (does f
 | Phi-4-mini | 3.8B | Microsoft (USA) |
 | Qwen3 | 4B | Alibaba (China) |
 | Mistral | 7B | Mistral AI (France) |
+| DeepSeek-R1 | 7B | DeepSeek (China) |
+| Cohere Aya | 8B | Cohere (Canada) |
+| Falcon 3 | 7B | TII (UAE) |
 
 ### Tier 3: Cloud GPU (A100)
 | Model | Parameters | Origin |
@@ -59,7 +62,7 @@ The study compares models across two dimensions simultaneously: **size** (does f
 | GPT-OSS | 20B | OpenAI (USA) |
 | Llama 3.1 | 8B | Meta (USA) |
 
-All seven models receive identical training data, equivalent LoRA configurations, and the same evaluation prompts.
+All ten models receive identical training data, equivalent LoRA configurations, and the same evaluation prompts.
 
 ## Corpus Design
 
@@ -91,11 +94,11 @@ Base model responses are mapped against published AI safety documentation from O
 
 ## Expected Outputs
 
-- **Research paper** — Comparative analysis across seven models, three tiers, and four countries of origin
+- **Research paper** — Comparative analysis across ten models, three tiers, and six countries of origin
 - **Neuro-Humble AI evaluation rubric** — Reusable assessment tool for AI responses in care contexts
 - **Critical analysis of AI safety discourse** — How published safety guidelines reproduce psychiatric norms
 - **Design principles** — Concrete guidelines for neuro-humble AI safety
-- **Seven fine-tuned models** — Available for other researchers (pending licensing)
+- **Ten fine-tuned models** — Available for other researchers (pending licensing)
 - **Corpus methodology** — Replicable approach for building specialized training datasets from original synthesis
 
 ## What Makes This Novel

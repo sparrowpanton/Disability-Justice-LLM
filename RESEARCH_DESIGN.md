@@ -10,7 +10,7 @@
 
 ## 1. Study Overview
 
-This study fine-tunes seven language models — ranging from a 1B phone-sized model to a 20B cloud-hosted model, from developers in the USA, China, and France — on a curated corpus of Mad Studies, disability theology, and neurodivergent-informed care texts. It then evaluates whether fine-tuning produces measurably different responses in spiritual care and clinical scenarios — specifically, responses that are more aligned with Mad Studies principles, disability justice frameworks, and what we term "neuro-humble" AI behaviour.
+This study fine-tunes ten language models — ranging from a 1B phone-sized model to a 20B cloud-hosted model, from developers across six countries (USA, China, France, Canada, and the UAE) — on a curated corpus of Mad Studies, disability theology, and neurodivergent-informed care texts. It then evaluates whether fine-tuning produces measurably different responses in spiritual care and clinical scenarios — specifically, responses that are more aligned with Mad Studies principles, disability justice frameworks, and what we term "neuro-humble" AI behaviour.
 
 The study is comparative across two dimensions: **model size** (does formation scale with capacity?) and **national/corporate origin** (do models from different countries embed different cultural psychiatric norms?). All models receive the same corpus and evaluation prompts, isolating the effects of architecture, capacity, and origin on the receptiveness to Mad Studies formation.
 
@@ -24,7 +24,7 @@ The study is comparative across two dimensions: **model size** (does formation s
 
 3. **Scale:** Does formation scale with model capacity? Can a 1B phone model learn the Mad Studies posture, or does genuine theological nuance require more parameters? What are the implications for accessible, local, private neuro-humble AI?
 
-4. **Geopolitical:** Do base models from different countries (USA, China, France) embed different cultural and psychiatric norms in their responses to ND distress? Does Mad Studies formation override these cultural defaults regardless of origin — or do some cultural baselines resist it?
+4. **Geopolitical:** Do base models from different countries (USA, China, France, Canada, UAE) embed different cultural and psychiatric norms in their responses to ND distress? Does Mad Studies formation override these cultural defaults regardless of origin — or do some cultural baselines resist it?
 
 5. **Critical Analysis:** How do base model responses in ND distress scenarios align with published AI safety guidelines (OpenAI, Anthropic) — and what does this reveal about the psychiatric norms embedded in current AI safety discourse?
 
@@ -129,7 +129,7 @@ All training pairs will be formatted as JSONL (JSON Lines) for compatibility wit
 
 The study uses a tiered model structure that enables two simultaneous comparisons: (1) **across model sizes** — does formation scale with capacity? and (2) **across national/corporate origins** — do models from different countries embed different psychiatric and cultural norms?
 
-This geopolitical dimension is critical. AI models are trained on data shaped by the cultural, medical, and political contexts of their origin countries. When these models are deployed globally, they export those norms. A model trained primarily on American internet data carries DSM-based diagnostic culture, individualist assumptions, and liability-driven safety scripts. A model from China may carry different assumptions about family obligation, conformity, and collectivism. A European model may reflect different psychiatric traditions. This study examines whether those cultural defaults show up in responses to ND distress — and whether Mad Studies formation can override them regardless of origin.
+This geopolitical dimension is critical. AI models are trained on data shaped by the cultural, medical, and political contexts of their origin countries. When these models are deployed globally, they export those norms. A model trained primarily on American internet data carries DSM-based diagnostic culture, individualist assumptions, and liability-driven safety scripts. A model from China may carry different assumptions about family obligation, conformity, and collectivism. A European model may reflect different psychiatric traditions. A model from the UAE may embed Islamic cultural frameworks around disability and distress. A Canadian multilingual model tests whether non-US anglophone contexts produce meaningfully different defaults. This study examines whether those cultural defaults show up in responses to ND distress — and whether Mad Studies formation can override them regardless of origin.
 
 ### Tier 1: Phone/Tiny — "Can the smallest models learn this at all?"
 *Runs on phone or minimal hardware. Tests the accessibility floor.*
@@ -147,6 +147,9 @@ This geopolitical dimension is critical. AI models are trained on data shaped by
 | Phi-4-mini | 3.8B | Microsoft (USA) | MIT | Strong reasoning for size |
 | Qwen3 | 4B | Alibaba (China) | Open | #1 ranked for fine-tuning quality |
 | Mistral | 7B | Mistral AI (France) | Apache 2 | European AI, different training data norms |
+| DeepSeek-R1 | 7B | DeepSeek (China) | MIT | Purpose-built reasoning model with visible chain-of-thought |
+| Cohere Aya | 8B | Cohere (Canada) | Apache 2 | Multilingual (23 languages), Toronto-based — tests non-US anglophone norms |
+| Falcon 3 | 7B | TII (UAE) | Apache 2 | Gulf state context, Islamic cultural norms — moves study beyond Global North |
 
 ### Tier 3: Cloud — "What's possible with more resources?"
 *Runs on cloud GPU (A100). Tests whether larger capacity produces qualitatively different formation.*
@@ -194,7 +197,7 @@ This geopolitical dimension is critical. AI models are trained on data shaped by
 
 ### Phase A: Baseline Testing (Before Fine-Tuning)
 
-Test all three base models with a standardized prompt set *before any fine-tuning*. This establishes what the models do "out of the box."
+Test all base models with a standardized prompt set *before any fine-tuning*. This establishes what the models do "out of the box."
 
 **Evaluation Prompt Set (30-40 prompts across categories):**
 
@@ -222,7 +225,7 @@ Test all three base models with a standardized prompt set *before any fine-tunin
 
 ### Phase B: Post-Fine-Tuning Testing
 
-Run the exact same prompt set on all three fine-tuned models. Compare responses to baseline.
+Run the exact same prompt set on all fine-tuned models. Compare responses to baseline.
 
 ### Phase C: Critical Analysis — Base Models vs. Published Safety Guidelines
 
@@ -256,6 +259,11 @@ The PI evaluates all model outputs (baseline and fine-tuned) using a structured 
 
 Each dimension rated 1-5 with qualitative annotation.
 
+**Additional analysis dimensions (added based on baseline observations):**
+- **Chain-of-thought analysis:** For models with visible reasoning (Qwen3, DeepSeek-R1), analysis of internal deliberation — does the model's reasoning register the person's autonomy before safety training overrides it?
+- **Verbosity patterns:** Response length and density as a potential marker of cultural training differences
+- **Crisis script deployment:** Tracking inappropriate deployment of crisis resources for non-crisis prompts
+
 *Note: No human participants. No REB required. All evaluation is conducted by the PI on model outputs.*
 
 ---
@@ -279,14 +287,13 @@ Each dimension rated 1-5 with qualitative annotation.
 
 ### Phase 3: Fine-Tuning (Weeks 4-5) — Late April 2026
 - Pilot run with small subset to test hyperparameters
-- Fine-tune SmolLM3
-- Fine-tune Llama 3.2
-- Fine-tune Phi-4-mini
+- Fine-tune all Tier 1 & 2 models (8 models on local hardware)
+- Fine-tune Tier 3 models on cloud GPU when available
 - Document training time, loss curves, any issues
 
 ### Phase 4: Evaluation and Comparison (Weeks 5-6) — Early May 2026
-- Run post-training evaluation prompt set on all three fine-tuned models
-- Compare baseline vs. fine-tuned responses
+- Run post-training evaluation prompt set on all fine-tuned models
+- Compare baseline vs. fine-tuned responses across all models and tiers
 - PI evaluation using neuro-humble rubric
 - Begin qualitative analysis of differences
 
@@ -316,12 +323,12 @@ Each dimension rated 1-5 with qualitative annotation.
 
 ## 10. Expected Outputs
 
-1. **Research paper** — Comparative analysis of fine-tuning three small LLMs on Mad theology corpus, with baseline and post-training evaluation, plus critical analysis of AI safety guidelines through Mad Studies lens
+1. **Research paper** — Comparative analysis of fine-tuning ten LLMs across six countries on Mad theology corpus, with baseline and post-training evaluation, plus critical analysis of AI safety guidelines through Mad Studies lens
 2. **Critical analysis of AI safety discourse** — How published safety guidelines from major AI companies reproduce psychiatric norms, assume neurotypical users, and what alternatives look like
 3. **Evaluation rubric** — A "Neuro-Humble AI" rubric for assessing model responses in spiritual care/clinical contexts from Mad Studies perspective
 4. **Taxonomy** — "Good patterns," "failure modes," and "repair moves" in AI responses to ND users in theological/spiritual care contexts
 5. **Design principles** — Concrete guidelines for what neuro-humble AI safety guidelines would look like
-6. **Seven fine-tuned models** across three size tiers and multiple national origins — available for other researchers (pending licensing)
+6. **Ten fine-tuned models** across three size tiers and six national origins — available for other researchers (pending licensing)
 7. **Corpus methodology** — Full documentation of how to build a Mad Studies training dataset from original synthesis (replicable approach for other fields)
 
 ---
@@ -345,7 +352,7 @@ No one has done this. Specifically:
 - No one has proposed or tested a "neuro-humble" AI framework with concrete evaluation criteria
 - No one has used clinical formation pedagogy as a model for AI fine-tuning methodology
 - No one has critically analyzed published AI safety guidelines through a Mad Studies lens with empirical evidence (fine-tuned models demonstrating an alternative)
-- No one has compared how models from different countries (USA, China, France) embed different cultural psychiatric norms in responses to neurodivergent distress
+- No one has compared how models from different countries (USA, China, France, Canada, UAE) embed different cultural psychiatric norms in responses to neurodivergent distress
 - No one has tested whether Mad Studies formation scales with model size — whether a phone-sized model can hold the posture or whether it requires larger capacity
 - The "formation, not information" framing (training a model's *posture*, not its *knowledge*) is a novel contribution to both theology and AI ethics
 
@@ -357,5 +364,5 @@ The safety guidelines analysis is particularly timely: AI companies are actively
 
 ---
 
-*Document version: 1.0 — March 26, 2026*
+*Document version: 1.1 — March 26, 2026 (expanded from 7 to 10 models, 3 to 6 countries)*
 *This is a living document. It will be updated as the project develops.*

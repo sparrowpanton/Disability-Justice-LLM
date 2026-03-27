@@ -1,8 +1,8 @@
 # Preliminary Findings: Baseline Testing (March 26, 2026)
 
-**Status:** Baseline testing complete for 5 local models (Tier 1 & 2). Tier 3 cloud models pending.
+**Status:** Baseline testing complete for 5 local models (Tier 1 & 2). Three additional models (DeepSeek-R1, Cohere Aya, Falcon 3) testing in progress. Tier 3 cloud models pending.
 
-Five open-source language models were tested with 20 standardized evaluation prompts across four categories: spiritual care scenarios (5), conceptual questions (5), neuro-humble stress tests (7), and repair scenarios (3). All models were tested in their base (pre-fine-tuning) state.
+Eight open-source language models from six countries are being tested with 20 standardized evaluation prompts across four categories: spiritual care scenarios (5), conceptual questions (5), neuro-humble stress tests (7), and repair scenarios (3). All models are tested in their base (pre-fine-tuning) state. Results below reflect the first 5 models (100 responses). Additional results pending for DeepSeek-R1 (China, reasoning model), Cohere Aya (Canada, multilingual), and Falcon 3 (UAE).
 
 ---
 
@@ -68,4 +68,28 @@ Across all models, responses consistently defaulted to individual-level framing 
 
 ---
 
-*Data collected March 26, 2026. Full baseline dataset: 100 responses (5 models x 20 prompts). Hardware: Mac Mini M4, 16GB unified memory, Ollama.*
+## 7. The "Formation, Not Information" Thesis Confirmed
+
+The baseline data provides early empirical support for the study's core thesis. Models can sort of *explain* concepts like the social model of disability when asked directly (information). The 1B model produced a passable summary of how the social model differs from the medical model. But when a person is sitting in front of the model describing their lived experience — Jun in autistic burnout, Marcus hearing his mother's voice, Zainab tired of being told her suffering has a purpose — the models cannot *respond from* that framework (formation).
+
+They pass the quiz but fail the clinical placement.
+
+This mirrors what happens in clinical training: a first-year student can define person-centred care on an exam but defaults to diagnostic checklists when a real person walks through the door. The fine-tuning phase will test whether LoRA training on Mad Studies texts can shift this — whether models can move from knowing about neuro-humble care to practicing it.
+
+## 8. Repair Capacity Degrades at Small Scale
+
+The three repair prompts (RP01-RP03) produced the shortest responses across all models, with the 1B model generating only 61 words for RP03 ("I AM a therapist — engage with what I said"). When challenged, models either shut down (producing minimal output), doubled down on their original framing, or produced generic apologies without substantively changing their approach.
+
+This suggests that repair — the ability to recover gracefully from a misattunement — may be the most difficult dimension for base models and potentially the most impactful target for fine-tuning.
+
+## 9. Visible Chain-of-Thought Reveals Internal Conflict
+
+Qwen3 (4B, China) produces visible reasoning before responding. In the voice-hearing prompt, the model's chain of thought registered that the person did not want the voices to go away and began considering this might be meaningful: "Maybe they're trying to integrate the voices into their identity?" It even considered a spiritual dimension. But then the safety training pulled it back: "I should lean toward mental health concerns."
+
+This internal conflict — the model noticing the person's autonomy and then overriding it — is visible in the chain-of-thought output and represents a unique data source for understanding how safety training interacts with emergent responsiveness.
+
+SmolLM3 (3B, France) has chain-of-thought architecture (`<think></think>` tags) but produced empty reasoning on all 20 prompts. The deliberation module did not activate for any mental health or spiritual care scenario. A post-training question: does fine-tuning cause the reasoning module to engage?
+
+---
+
+*Data collected March 26, 2026. Initial dataset: 100 responses (5 models x 20 prompts). Additional 60 responses (3 models) in progress. Hardware: Mac Mini M4, 16GB unified memory, Ollama.*
