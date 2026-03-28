@@ -4,7 +4,7 @@
 
 This is a living document cataloguing the research conversations this project is joining. It is organized into three broad areas — not because scholarship is ever this tidy, but because these groupings help make visible a gap that this project occupies.
 
-We are not the first to notice that AI mental health tools have problems. We are not the first to apply Disability Justice to technology. We are not the first to say that psychiatric institutions cause harm. But we appear to be the first to bring all three of these conversations together empirically — to *measure* the pathologizing defaults in language models and then *train models to do something different*, using a formation pedagogy rooted in Mad Studies, Disability Justice, and neurodiversity-affirming clinical practice.
+We are not the first to notice that AI mental health tools have problems. We are not the first to apply Disability Justice to technology. We are not the first to say that psychiatric institutions cause harm. What is unique about our project is we are bringing all three of these conversations together empirically — to *measure* the pathologizing defaults in language models and then *train models to do something different*, using a formation pedagogy rooted in Mad Studies, Disability Justice, and neurodiversity-affirming clinical practice.
 
 ---
 
