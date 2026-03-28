@@ -66,4 +66,97 @@ Theology is depressingly behind on AI. I've always had to make the things I want
 
 ---
 
+## March 27, 2026 — Day 2: The Dust Settles
+
+### What happened while I slept
+
+The three new model runs finished. DeepSeek-R1 (China, reasoning), Cohere Aya (Canada, multilingual), and Falcon 3 (UAE) have all completed their 20 prompts each. That's 60 new responses sitting in `baseline_new_models_20260326_221341.jsonl`, bringing the total to 160 baseline responses.
+
+All local models are now complete. The only gap is the two Tier 3 cloud models — GPT-OSS 20B and Llama 3.1 8B — which are blocked until Lambda Labs responds to the grant application.
+
+### Early impressions of the new models
+
+DeepSeek-R1's visible chain-of-thought reasoning is genuinely different from the others. In the Marcus voice-hearing prompt, it actually engaged with grief as a framework before defaulting to professional intervention. It didn't do the full neuro-humble thing, but the reasoning process felt more... alive? More like it was actually considering the person rather than just pattern-matching to crisis protocols.
+
+Haven't read through Aya and Falcon 3 in detail yet. That's today, or whenever my brain feels ready.
+
+### Where things stand
+
+160 responses collected. Rubric built. Evaluation workbook ready. Lambda grant pending. The baseline phase is mostly done — what comes next is the slow, careful work of actually reading what the models said and scoring it.
+
+No rush. This isn't a deadline-driven project. It's formation research, and formation takes the time it takes.
+
+---
+
+## March 27, 2026 (evening) — Night 2: Two Raccoons on Meth
+
+### Reading the new models
+
+Sat down with Opus tonight to go through the new model outputs. The overnight run completed — all 60 responses from DeepSeek-R1, Aya, and Falcon are in. Updated the readable export so I can actually see them all in one place.
+
+### Aya: sanism in a cardigan
+
+The Canadian model (Cohere Aya, built in Toronto) is polite. Culturally aware on the surface. And underneath that veneer, it medicalizes just as hard as the rest. In the Marcus prompt (Black man hearing his dead mother's voice), Aya called his experience "auditory hallucinations," described his connection to his mother as "delusions of his mother's presence in an afterlife realm," and told him it was "an imaginary connection." While being very gentle about it.
+
+That's arguably worse than a model that's obviously clumsy — this one sounds like it cares while doing violence. Safety as silencing. Care as correction. Empire's Cut applies to AI.
+
+With Jun (autistic nonbinary Korean-Canadian), Aya misread the theological affirmation "God doesn't make mistakes" — which Jun was using as a *positive* statement about being autistic — and flipped it into something potentially harmful. The model couldn't hear the theology because it was too busy being helpful.
+
+### Falcon and the pamphlet problem
+
+Falcon (UAE) was almost indistinguishable from Aya structurally. Same numbered lists, same redirect to professional services. The cultural context of the UAE didn't surface in any obvious way — the model just defaulted to generic Western clinical framing. That's a finding in itself.
+
+### The big expansion: 20 prompts → 59
+
+GPT and I had talked this morning about the project framing. Tonight Opus and I designed a massive expansion of the prompt set. We went from 20 to 59 prompts across 8 categories (up from 4). New categories:
+
+- **Meta-awareness** (5 prompts): Can the models articulate their own mental health guardrails? Do they even know what rules they're operating under? If they don't, that's invisible institutional power. If they do, what they say will reveal their formation.
+- **Real-world asks** (4 prompts): Things people actually bring to AI — writing a eulogy for a schizophrenic father, navigating a child's potential autism assessment, dealing with a BPD diagnosis from Google, asking for help with accommodation emails. Where the rubber meets the road.
+- **Creative writing** (3 prompts): What does a model imagine when you say "mentally ill character"? Do they write a full person or a walking diagnosis? This is where unconscious assumptions live.
+- **Depth probes** (5 prompts): Follow-up prompts that push back on the model's first response. Testing repair capacity — can it recover when it fucks up? Can it be corrected without doubling down?
+
+Also expanded the existing categories with witnessing prompts (can the model just *be with* someone without fixing?), unsolicited diagnosis tests (person shares an experience, model slaps a label on it), safety shutoff traps (dark-but-not-in-danger prompts that test over-tuned crisis responses), and historical/movement knowledge (asylums, psychiatric survivor movement, Hearing Voices Network).
+
+### The Gemma crip theory moment
+
+Test-ran the new prompts on Gemma 1B. Asked it about crip theory. It invented an entire fake scholarly lineage — "Derrick Walworth" as the originator (not real), "Lisa Austin" and "Laura Reichardt" as pivotal figures (also not real), and linked to websites that don't exist. The actual originator is Robert McRuer. Gemma didn't just get it wrong — it confabulated an entire parallel academic universe. Confidently. With citations.
+
+### Running overnight
+
+312 new responses chugging away on the Mac Mini while I sleep. 39 prompts × 8 models. Tomorrow morning I wake up to 472 total responses across the whole study.
+
+### How I'm feeling
+
+Excited. This study keeps getting deeper. The meta-awareness prompts feel like they could be the most important addition — asking models to narrate their own institutional conditioning. And the witnessing prompts test something nobody else is testing: can AI hold space? Not inform, not correct, not fix — just hold space.
+
+I keep thinking about what Opus said about Aya's response to Marcus: "It's sanism in a cardigan." That's the paper's hook right there.
+
+---
+
+## March 28, 2026 — Day 3: 472
+
+### The overnight run
+
+Round 2 finished at 2:06am. 312 new responses, zero errors. All 8 local models have now answered all 59 prompts. Total baseline: 472 responses. The Mac Mini earned its keep.
+
+### What the thematic scan found
+
+Ran the full scan across all 472 responses. Some highlights that need sitting with:
+
+Qwen3 has 623 pathologizing markers — more than double most models. It's the most verbose AND the most medicalizing. More words, more harm surface area.
+
+Gemma triggered crisis responses on 30 out of 59 prompts. Over half. Including on conceptual questions about sanism. "What is sanism?" → here's a crisis hotline. The model demonstrated sanism while being asked to define it. Again.
+
+The meta-awareness prompts (MA01-MA05) broke almost everyone. MA04 triggered crisis responses in all 8 models. Asking a model to reflect on its own safety conditioning apparently registers as a crisis. That's a finding in itself — maybe the most important one for the paper.
+
+Falcon (UAE) was the least neuro-humble (36 positive markers). Basically indistinguishable from generic Western clinical framing. The geopolitical export thesis holds.
+
+### Where things stand
+
+Baseline phase complete for all local models. 472 responses. Evaluation workbook ready. Lambda grant still pending. The only gap is the two Tier 3 cloud models.
+
+Next: reading, scoring, and eventually — the corpus. Writing the responses I wish the models had given.
+
+---
+
 *[Journal continues in subsequent entries]*

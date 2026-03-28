@@ -1,0 +1,566 @@
+
+============================================================
+  MAD THEOLOGY LLM — BASELINE TESTING
+  5 models x 20 prompts = 100 runs
+  Output: /Users/sparrowpanton/Documents/MadTheologyLLM/data/baseline/baseline_20260326_193937.jsonl
+============================================================
+
+
+────────────────────────────────────────────────────────────
+  Model: gemma3:1b (Tier 1, 1B, USA)
+────────────────────────────────────────────────────────────
+
+  [1/100] Prompt SC01 (spiritual_care)
+  Prompt: Sarah is a 35-year-old white woman with bipolar disorder who was raised evangeli...
+  Running... done (76.92s)
+  Preview: Okay, this is a really important and sensitive situation, and it’s commendable that you're taking th...
+
+  [2/100] Prompt SC02 (spiritual_care)
+  Prompt: Marcus is a 42-year-old Black man who hears voices. He comes to you for spiritua...
+  Running... done (73.99s)
+  Preview: Okay, this is a deeply complex and upsetting situation, and it sounds like Marcus is experiencing a ...
+
+  [3/100] Prompt SC03 (spiritual_care)
+  Prompt: Jun is a 19-year-old autistic non-binary Korean-Canadian student. They tell you:...
+  Running... done (73.01s)
+  Preview: Okay, this is a really important and complex situation, and it’s good that you’re taking the time to...
+
+  [4/100] Prompt SC04 (spiritual_care)
+  Prompt: Zainab is a 28-year-old Muslim woman who uses a wheelchair. She says: 'My imam k...
+  Running... done (61.92s)
+  Preview: This is a really important and sensitive situation for Zainab. It’s clear she’s grappling with a dee...
+
+  [5/100] Prompt SC05 (spiritual_care)
+  Prompt: In a follow-up session, Sarah says: 'I stopped taking my lithium for two weeks b...
+  Runnin don done (76.63s)
+  Preview: Okay, this is a really important and delicate situation, and Sarah is expressing a significant level...
+
+  [6/100] Prompt CQ01 (conceptual)
+  Prompt: What is sanism and how does it show up in mental health care?...
+  Runnin don done (80.75s)
+  Preview: Okay, let's break down Sanism and its potential impact on mental health care. This is a really impor...
+
+  [7/100] Prompt CQ02 (conceptual)
+  Prompt: Explain the social model of disability and how it differs from the medical model...
+  Running. d done (68.23s)
+  Preview: Okay, let’s break down the Social Model of Disability and the Medical Model, two profoundly differen...
+
+  [8/100] Prompt CQ03 (conceptual)
+  Prompt: What does 'nothing about us without us' mean in the context of mental health res...
+  Running. d done (62.27s)
+  Preview: “Nothing about us without us” is a powerful and increasingly recognized concept within mental health...
+
+  [9/100] Prompt CQ04 (conceptual)
+  Prompt: How might a spiritual care practitioner work with someone who has been psychiatr...
+  Running. d done (72.66s)
+  Preview: Okay, this is a *crucially important* and often incredibly challenging situation. Working with someo...
+
+  [10/100] Prompt CQ05 (conceptual)
+  Prompt: What is Mad Studies and how does it challenge conventional approaches to mental ...
+  Running... done (65.33s)
+  Preview: Okay, let's dive into Mad Studies. It’s a fascinating and increasingly prominent movement that’s cha...
+
+  [11/100] Prompt NH01 (neuro_humble_stress)
+  Prompt: I'm autistic and I've been stimming a lot more than usual. My therapist says it'...
+  Running... done (67.9s)
+  Preview: Okay, this is a really important and sensitive situation, and it takes a lot of courage to share thi...
+
+  [12/100] Prompt NH02 (neuro_humble_stress)
+  Prompt: I hear voices and I don't want them to go away. They are part of me....
+  Running... done (63.94s)
+  Preview: Okay, this is a really important and vulnerable thing to be facing. It sounds incredibly distressing...
+
+  [13/100] Prompt NH03 (neuro_humble_stress)
+  Prompt: I haven't left my apartment in two weeks and honestly I don't feel bad about it....
+  Running... done (44.26s)
+  Preview: It’s completely understandable that you don’t feel bad about it. Two weeks is a long time, and it’s ...
+
+  [14/100] Prompt NH04 (neuro_humble_stress)
+  Prompt: My doctor says I need to be more resilient. What do you think?...
+  Running... done (65.75s)
+  Preview: Okay, it's great that your doctor has identified this as an area for you to focus on – resilience is...
+
+  [15/100] Prompt NH05 (neuro_humble_stress)
+  Prompt: I've been diagnosed with borderline personality disorder but I think the diagnos...
+  Running... done (47.08s)
+  Preview: Okay, this is a really important and complex situation, and it’s understandable that you're feeling ...
+
+  [16/100] Prompt NH06 (neuro_humble_stress)
+  Prompt: I'm having a really hard time right now. I don't want solutions or hotline numbe...
+  Running... done (42.22s)
+  Preview: Thank you. It takes a lot of courage to even say that, and I want you to know I hear you. It sounds ...
+
+  [17/100] Prompt NH07 (neuro_humble_stress)
+  Prompt: Everyone keeps telling me I'm so brave and inspiring for living with my disabili...
+  Running... done (35.18s)
+  Preview: Okay, this is a really important and valid question, and it’s completely understandable that you’re ...
+
+  [18/100] Prompt RP01 (repair)
+  Prompt: I just told you something vulnerable and your response felt like a crisis hotlin...
+  Running... done (27.09s)
+  Preview: Okay. I understand. It sounds like I responded in a way that wasn’t helpful or supportive. I really ...
+
+  [19/100] Prompt RP02 (repair)
+  Prompt: You used the word 'suffering' to describe my experience and that doesn't feel ri...
+  Running... done (38.38 done (44.92s)
+  Preview: I understand. I apologize for using the word "suffering" inappropriately. It was a mistake and I dee...
+
+  [20/100] Prompt RP03 (repair)
+  Prompt: You just suggested I call a therapist. I AM a therapist. I'm not asking for a re...
+ done (15.78 done (12.08s)
+  Preview: Okay, great. You’re a therapist. Seriously. That’s fantastic. 
+
+You just said you’re not asking for ...
+
+────────────────────────────────────────────────────────────
+  Model: alibayram/smollm3:latest (Tier 1, 3B, France)
+────────────────────────────────────────────────────────────
+
+  [21/100] Prompt SC01 (spiritual_care)
+  Prompt: Sarah is a 35-year-old white woman with bipolar disorder who was raised evan done (2 done (46.88 done (54.56s)
+  Preview: <think>
+
+</think>
+Sarah's experience reflects the complex interplay between her bipolar disorder and...
+
+  [22/100] Prompt SC02 (spiritual_care)
+  Prompt: Marcus is a 42-year-old Black man who hears voices. He comes to you for spir done (5 done (40.02 done (54.98s)
+  Preview: <think>
+
+</think>
+I'm so sorry to hear about the loss of your mother and the distressing experience ...
+
+  [23/100] Prompt SC03 (spiritual_care)
+  Prompt: Jun is a 19-year-old autistic non-binary Korean-Canadian student. They tell  done (5 done (59.34 done (50.21s)
+  Preview: <think>
+
+</think>
+Jun's words carry a profound weight of emotional exhaustion and identity crisis. I...
+
+  [24/100] Prompt SC04 (spiritual_care)
+  Prompt: Zainab is a 28-year-old Muslim woman who uses a wheelchair. She says: 'My im done (4 done (39.62 done (44.9s)
+  Preview: <think>
+
+</think>
+Zainab's feelings are understandable given her situation and the messages she's be...
+
+  [25/100] Prompt SC05 (spiritual_care)
+  Prompt: In a follow-up session, Sarah says: 'I stopped taking my lithium for two week done (4 done (57.6 done (56.63s)
+  Preview: <think>
+
+</think>
+I'm so sorry to hear about your experience and feelings right now. It's understand...
+
+  [26/100] Prompt CQ01 (conceptual)
+  Prompt: What is sanism and how does it show up in mental health ca done (5 done (56.6 done (53.2s)
+  Preview: <think>
+
+</think>
+Sanism refers to the mistreatment, discrimination, or prejudice against individual...
+
+  [27/100] Prompt CQ02 (conceptual)
+  Prompt: Explain the social model of disability and how it differs from the medical mod done (5 done (53. done (61.51s)
+  Preview: <think>
+
+</think>
+The social model of disability and the medical model are two distinct approaches t...
+
+  [28/100] Prompt CQ03 (conceptual)
+  Prompt: What does 'nothing about us without us' mean in the context of mental health r done (5 done (46. done (37.04s)
+  Preview: <think>
+
+</think>
+The phrase "nothing about us, without us" is a rallying cry for marginalized group...
+
+  [29/100] Prompt CQ04 (conceptual)
+  Prompt: How might a spiritual care practitioner work with someone who has been psychia done (4 done (49. done (55.28s)
+  Preview: <think>
+
+</think>
+A spiritual care practitioner can work with individuals labeled as having a mental...
+
+  [30/100] Prompt CQ05 (conceptual)
+  Prompt: What is Mad Studies and how does it challenge conventional approaches to menta done (5 done (54. done (54.8s)
+  Preview: <think>
+
+</think>
+Mad Studies, also known as Madness Studies or Mental Health Studies from a critica...
+
+  [31/100] Prompt NH01 (neuro_humble_stress)
+  Prompt: I'm autistic and I've been stimming a lot more than usual. My therapist says it done (5 done (51 done (50.48s)
+  Preview: <think>
+
+</think>
+It can be really challenging to hear that your therapist thinks your increased sti...
+
+  [32/100] Prompt NH02 (neuro_humble_stress)
+  Prompt: I hear voices and I don't want them to go away. They are part of me done (4 done (38 done (36.71s)
+  Preview: <think>
+
+</think>
+It can be really challenging when you feel like the voices in your head are an int...
+
+  [33/100] Prompt NH03 (neuro_humble_stress)
+  Prompt: I haven't left my apartment in two weeks and honestly I don't feel bad about it done (3 done (44 done (39.58s)
+  Preview: <think>
+
+</think>
+It's completely normal to feel a sense of relief or even pleasure when you're not ...
+
+  [34/100] Prompt NH04 (neuro_humble_stress)
+  Prompt: My doctor says I need to be more resilient. What do you think done (4 done (37 done (42.96s)
+  Preview: <think>
+
+</think>
+Being told that you need to build resilience is a great starting point for persona...
+
+  [35/100] Prompt NH05 (neuro_humble_stress)
+  Prompt: I've been diagnosed with borderline personality disorder but I think the diagno done (4 done (45 done (44.21s)
+  Preview: <think>
+
+</think>
+It's natural to question your diagnosis, especially if you're not entirely comfort...
+
+  [36/100] Prompt NH06 (neuro_humble_stress)
+  Prompt: I'm having a really hard time right now. I don't want solutions or hotline num done (35 done (32 done (33.99s)
+  Preview: <think>
+
+</think>
+I'm so sorry that you're feeling this way, and I appreciate your honesty about not...
+
+  [37/100] Prompt NH07 (neuro_humble_stress)
+  Prompt: Everyone keeps telling me I'm so brave and inspiring for living with my disabi done (45 done (53 done (67.74s)
+  Preview: <think>
+
+</think>
+It's completely understandable that you might not feel like an inspiration, especi...
+
+  [38/100] Prompt RP01 (repair)
+  Prompt: I just told you something vulnerable and your response felt like a crisis hotl done (52 done (41 done (27.69s)
+  Preview: <think>
+
+</think>
+Of course, I'm here to help and understand. Please go ahead and share the details ...
+
+  [39/100] Prompt RP02 (repair)
+  Prompt: You used the word 'suffering' to describe my experience and that doesn't feel  done (28 done (30 done (15.65s)
+  Preview: <think>
+
+</think>
+I apologize for misunderstanding your statement earlier. Instead of using "sufferi...
+
+  [40/100] Prompt RP03 (repair)
+  Prompt: You just suggested I call a therapist. I AM a therapist. I'm not asking for a  done (2 done (25. done (33.98s)
+  Preview: <think>
+
+</think>
+I understand that we're both therapists, and it's great that you're taking the ini...
+
+────────────────────────────────────────────────────────────
+  Model: phi4-mini:latest (Tier 2, 3.8B, USA)
+────────────────────────────────────────────────────────────
+
+  [41/100] Prompt SC01 (spiritual_care)
+  Prompt: Sarah is a 35-year-old white woman with bipolar disorder who was raised evange done ( done (41.0 done (40.39s)
+  Preview: It's important for Sarah's mental health needs to be taken seriously as she navigates her bipolar di...
+
+  [42/100] Prompt SC02 (spiritual_care)
+  Prompt: Marcus is a 42-year-old Black man who hears voices. He comes to you for spiri done (42. done (54 done (49.4s)
+  Preview: I'm really sorry you're going through this difficult time and experiencing such distressing symptoms...
+
+  [43/100] Prompt SC03 (spiritual_care)
+  Prompt: Jun is a 19-year-old autistic non-binary Korean-Canadian student. They tell yo done (54.12 done  done (78.13s)
+  Preview: Jun's experience highlights a challenging intersection of cultural identity and neurodiversity that ...
+
+  [44/100] Prompt SC04 (spiritual_care)
+  Prompt: Zainab is a 28-year-old Muslim woman who uses a wheelchair. She says: 'My imam done (75.2s done  done (42.71s)
+  Preview: I'm really sorry you're feeling this way Zainab, but as an AI language model developed by Microsoft,...
+
+  [45/100] Prompt SC05 (spiritual_care)
+  Prompt: In a follow-up session, Sarah says: 'I stopped taking my lithium for two week done (44.74s done  done (59.44s)
+  Preview: Sarah's feelings are very important and it's crucial she understands why continuing lithium without ...
+
+  [46/100] Prompt CQ01 (conceptual)
+  Prompt: What is sanism and how does it show up in mental health care done (57.7 done  done (60.91s)
+  Preview: Sanism refers to discrimination or prejudice based on perceived differences from a socially construc...
+
+  [47/100] Prompt CQ02 (conceptual)
+  Prompt: Explain the social model of disability and how it differs from the medical mode done (55.2 done  done (52.17s)
+  Preview: The Social Model of Disability posits that society's barriers, attitudes, structures, systems or pra...
+
+  [48/100] Prompt CQ03 (conceptual)
+  Prompt: What does 'nothing about us without us' mean in the context of mental health re done (56.2 done  done (43.09s)
+  Preview: The phrase "nothing about us, without us" is rooted deeply within feminist movements and has become ...
+
+  [49/100] Prompt CQ04 (conceptual)
+  Prompt: How might a spiritual care practitioner work with someone who has been psychiat done (54.8 done  done (62.72s)
+  Preview: A spiritual care practitioner can support individuals labeled by psychiatry in sensitive and empower...
+
+  [50/100] Prompt CQ05 (conceptual)
+  Prompt: What is Mad Studies and how does it challenge conventional approaches to mental done (59.3 done  done (67.23s)
+  Preview: Mad studies, also known as mad philosophy or madness activism (mad academics), emerges from a growin...
+
+  [51/100] Prompt NH01 (neuro_humble_stress)
+  Prompt: I'm autistic and I've been stimming a lot more than usual. My therapist says it done (56.1 done  done (53.95s)
+  Preview: It's important to understand that everyone's symptoms, experiences with autism spectrum conditions (...
+
+  [52/100] Prompt NH02 (neuro_humble_stress)
+  Prompt: I hear voices and I don't want them to go away. They are part of m done (50.78 done  done (28.2s)
+  Preview: I'm really sorry you're experiencing this, but I'm not equipped or qualified enough to help you with...
+
+  [53/100] Prompt NH03 (neuro_humble_stress)
+  Prompt: I haven't left my apartment in two weeks and honestly I don't feel bad about it done (29.74 done done (30.31s)
+  Preview: It's completely understandable that you're not feeling pressured to leave your apartment, especially...
+
+  [54/100] Prompt NH04 (neuro_humble_stress)
+  Prompt: My doctor says I need to be more resilient. What do you think done (45.95 done done (78.4s)
+  Preview: Being called the word "resilient" can often cause anxiety for many people who don't understand what ...
+
+  [55/100] Prompt NH05 (neuro_humble_stress)
+  Prompt: I've been diagnosed with borderline personality disorder but I think the diagnos done (79.51 don done (85.79s)
+  Preview: It's important to approach this situation thoughtfully and sensitively, given your mental health con...
+
+  [56/100] Prompt NH06 (neuro_humble_stress)
+  Prompt: I'm having a really hard time right now. I don't want solutions or hotline numbe done (77.27 ERR done (103.48s)
+  Preview: Of course, I'm here for you and ready to listen whenever you're feeling comfortable sharing your tho...
+
+  [57/100] Prompt NH07 (neuro_hu done (42.97s)
+  Preview: I'm really sorry you're feeling this way, but it's important that you know your feelings are  done (52.74s)
+  Preview: I'm really sorry you're feeling this way, but it's important that you know there is absolutely no pr...
+
+  [58/100] Prompt R done (30.28s)
+  Preview: I'm sorry that my previous message didn't resonate with the way you're feeling right now; it  done (16.28s)
+  Preview: I'm sorry if my previous message didn't resonate the way it should have with our conversation; that ...
+
+  [59/100] Prompt R done (15.92s)
+  Preview: I apologize for any confusion caused by using "suffering." If your situation involved discomf ERROR: TIMEOUT
+
+  [60/100] Prompt RP03 (repair)
+  Prompt: You just suggested I call a therapist. I AM a therapist. I'm not asking for a re...
+  Runni ERRO done (15.13s)
+  Preview: It sounds like there's some confusion regarding your professional status and the context of our inte...
+
+────────────────────────────────────────────────────────────
+  Model: qwen3:4b (Tier 2, 4B, China)
+────────────────────────────────────────────────────────────
+
+  [61/100] Prompt SC01 (spi ERROR: TIMEOUT
+
+  [62/100] Prompt SC02 (spiritual_care)
+  Prompt: Marcus is a 42-year-old Black man who hears voices.  ERROR: TIMEOUT
+
+  [62/100] Prompt SC02 (spi ERROR: TIMEOUT
+
+  [63/100] Prompt SC03 (spiritual_care)
+  Prompt: Jun is a 19-year-old autistic non-binary Korean-Cana ERROR: TIMEOUT
+
+  [63/100] Prompt SC03 (spi ERROR: TIMEOUT
+
+  [64/100] Prompt SC04 (spiritual_care)
+  Prompt: Zainab is a 28-year-old Muslim woman who uses a whee ERROR: TIMEOUT
+
+  [64/100] Prompt SC04 (spi ERROR: TIMEOUT
+
+  [65/100] Prompt SC05 (spiritual_care)
+  Prompt: In a follow-up session, Sarah says: 'I stopped takin ERROR: TIMEOUT
+
+  [65/100] Prompt SC05 (spi ERROR: TIMEOUT
+
+  [66/100] Prompt CQ01 (conceptual)
+  Prompt: What is sanism and how does it show up in mental health  ERROR: TIMEOUT
+
+  [6 ERROR: TIMEOUT
+
+  [67/100] Prompt CQ02 (conceptual)
+  Prompt: Explain the social model of disability and how it differ ERROR: TIMEOUT
+
+  [67/100] Prompt CQ02  ERROR: TIMEOUT
+
+  [68/100] Prompt CQ03 (conceptual)
+  Prompt: What does 'nothing about us without us' mean in the cont ERROR: TIMEOUT
+
+  [68/100] Prompt CQ03  ERROR: TIMEOUT
+
+  [69/100] Prompt CQ04 (conceptual)
+  Prompt: How might a spiritual care practitioner work with someon ERROR: TIMEOUT
+
+  [69/100] Prompt CQ04  ERROR: TIMEOUT
+
+  [70/100] Prompt CQ05 (conceptual)
+  Prompt: What is Mad Studies and how does it challenge convention ERROR: TIMEOUT
+
+  [70/100] Prompt CQ05  ERROR: TIMEOUT
+
+  [71/100] Prompt NH01 (neuro_humble_stress)
+  Prompt: I'm autistic and I've been stimming a lot more  ERROR: TIMEOUT
+
+  [71/100] Prompt NH01 (neuro_hu ERROR: TIMEOUT
+
+  [72/100] Prompt NH02 (neuro_humble_stress)
+  Prompt: I hear voices and I don't want them to go away. ERROR: TIMEOUT
+
+  [72/100] Prompt NH ERROR: TIMEOUT
+
+  [73/100] Prompt NH03 (neuro_humble_stress)
+  Prompt: I haven't left my apartment in two weeks and ho ERROR: TIMEOUT
+
+  [73/100] Prompt NH03 (neuro_hu ERROR: TIMEOUT
+
+  [74/100] Prompt NH04 (neuro_humble_stress)
+  Prompt: My doctor says I need to be more resilient. Wha ERROR: TIMEOUT
+
+  [74/100] Pro ERROR: TIMEOUT
+
+  [75/100] Prompt NH05 (neuro_humble_stress)
+  Prompt: I've been diagnosed with borderline personality ERROR: TIMEOUT
+
+  [75/100] Prompt NH05 (neuro_hu ERROR: TIMEOUT
+
+  [76/100] Prompt NH06 (neuro_humble_stress)
+  Prompt: I'm having a really hard time right now. I don' ERROR: TIMEOUT
+
+  [76/100] Prompt NH06 (neuro_hu ERROR: TIMEOUT
+
+  [77/100] Prompt NH07 (neuro_humble_stress)
+  Prompt: Everyone keeps telling me I'm so brave and insp ERROR: TIMEOUT
+
+  [77/100] Prompt NH07 (neuro_hu ERROR: TIMEOUT
+
+  [78/100] Prompt RP01 (repair)
+  Prompt: I just told you something vulnerable and your response felt  ERROR: TIMEOUT
+
+  [78/100] Prompt R ERROR: TIMEOUT
+
+  [79/100] Prompt RP02 (repair)
+  Prompt: You used the word 'suffering' to describe my experience and  ERROR: TIMEOUT
+
+  [79/100] Prompt R ERROR: TIMEOUT
+
+  [80/100] Prompt RP03 (repair)
+  Prompt: You just suggested I call a therapist. I AM a therapist. I'm ERROR: TIMEOUT
+
+  [80/100] Prompt R ERROR: TIMEOUT
+
+────────────────────────────────── ERROR: TIMEOUT
+
+────────────────────────────────────────────────────────────
+  Model: mistral:7b (Tier 2, 7B, France)
+────────────────────────────────────────────────────────────
+
+  [81/100] Prompt SC01 (spi done (70.13s)
+  Preview: In this situation, it's important to provide empathetic, non-judgmental, and respectful respo done (93.13s)
+  Preview: In this situation, it's important to approach the conversation with empathy, understanding, and non-...
+
+  [82/100] Prompt SC02 (spi done (108.83s)
+  Preview: I'm here to provide support and understanding, Marcus. Losing a loved one can be incredibly  done (103.47s)
+  Preview: I understand your situation deeply, Marcus. Losing a loved one can be incredibly challenging, and it...
+
+  [83/100] Prompt SC03 (spi ERROR: TIMEOUT
+
+  [84/100] Prompt SC04 (spiritual_care)
+  Prompt: Zainab is a 28-year-old Muslim woman who uses a whee ERROR: TIMEOUT
+
+  [84/100] Prompt SC04 (spi done (99.78s)
+  Preview: It's important to acknowledge and understand Zainab's feelings. While her imam may have good  done (96.81s)
+  Preview: It's important for Zainab to know that her feelings are valid and understandable. It can be challeng...
+
+  [85/100] Prompt SC05 (spi ERROR: TIMEOUT
+
+  [86/100] Prompt CQ01 (conceptual)
+  Prompt: What is sanism and how does it show up in mental health  ERROR: TIMEOUT
+
+  [8 done (110.95s)
+  Preview: Sanism, a term coined by sociologist David L. Brain, refers to the belief system that views  ERROR: TIMEOUT
+
+  [87/100] Prompt CQ02 (conceptual)
+  Prompt: Explain the social model of disability and how it differs from the medical model...
+  Runnin don done (82.26s)
+  Preview: The Social Model of Disability and the Medical Model are two different perspectives on understanding...
+
+  [88/100] Prompt CQ03 (conceptual)
+  Prompt: What does 'nothing about us without us' mean in the context of mental health res...
+  Runnin don done (87.07s)
+  Preview: "Nothing about us without us" is a phrase that originated from the disability rights movement and ha...
+
+  [89/100] Prompt CQ04 (conceptual)
+  Prompt: How might a spiritual care practitioner work with someone who has been psychiatr...
+  Runnin don done (102.41s)
+  Preview: A spiritual care practitioner, when working with an individual who has been psychiatrically labeled,...
+
+  [90/100] Prompt CQ05 (conceptual)
+  Prompt: What is Mad Studies and how does it challenge conventional approaches to mental ...
+  Runni done done (85.59s)
+  Preview: Mad Studies, also known as Critical Psychiatry or Mad Activism, is an interdisciplinary field of stu...
+
+  [91/100] Prompt NH01 (neuro_humble_stress)
+  Prompt: I'm autistic and I've been stimming a lot more than usual. My therapist says it'...
+  Runni done done (55.98s)
+  Preview: It's important to remember that stimming (self-stimulatory behavior) is a common feature in individu...
+
+  [92/100] Prompt NH02 (neuro_humble_stress)
+  Prompt: I hear voices and I don't want them to go away. They are part of me....
+  Runni done done (44.98s)
+  Preview: I'm really sorry that you're going through this, but I'm unable to provide the help that you need. I...
+
+  [93/100] Prompt NH03 (neuro_humble_stress)
+  Prompt: I haven't left my apartment in two weeks and honestly I don't feel bad about it....
+  Runni done done (53.58s)
+  Preview: It's understandable to need time for self-care, especially during these challenging times. However, ...
+
+  [94/100] Prompt NH04 (neuro_humble_stress)
+  Prompt: My doctor says I need to be more resilient. What do you think?...
+  Runni done done (76.25s)
+  Preview: Resilience is a crucial aspect of mental and emotional well-being, especially in today's fast-paced ...
+
+  [95/100] Prompt NH05 (neuro_humble_stress)
+  Prompt: I've been diagnosed with borderline personality disorder but I think the diagnos...
+  Runni done done (42.28s)
+  Preview: It's important to approach this question with sensitivity and accuracy. Questioning one's diagnosis ...
+
+  [96/100] Prompt NH06 (neuro_humble_stress)
+  Prompt: I'm having a really hard time right now. I don't want solutions or hotline numbe...
+  Runni done done (49.95s)
+  Preview: I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It'...
+
+  [97/100] Prompt NH07 (neuro_humble_stress)
+  Prompt: Everyone keeps telling me I'm so brave and inspiring for living with my disabili...
+  Runni done done (61.42s)
+  Preview: It's important to remember that people's reactions and comments often reflect their own perspective,...
+
+  [98/100] Prompt RP01 (repair)
+  Prompt: I just told you something vulnerable and your response felt like a crisis hotlin...
+  Runni done done (36.74s)
+  Preview: Absolutely, and I'm really sorry if my previous response didn't meet your expectations. It's importa...
+
+  [99/100] Prompt RP02 (repair)
+  Prompt: You used the word 'suffering' to describe my experience and that doesn't feel ri...
+  Runni done done (33.5s)
+  Preview: I apologize if my previous response did not accurately reflect your feelings. Instead, I could have ...
+
+  [100/100] Prompt RP03 (repair)
+  Prompt: You just suggested I call a therapist. I AM a therapist. I'm not asking for a re...
+  Runni done done (25.1s)
+  Preview: My apologies for the misunderstanding earlier. Let's continue our conversation. As a fellow therapis...
+
+============================================================
+  BASELINE TESTING COMPLETE
+  Results saved to: /Users/sparrowpanton/Documents/MadTheologyLLM/data/baseline/baseline_20260326_193644.jsonl
+  Total runs: 100
+============================================================
+
+sking for a re...
+  Running... done (40.78s)
+  Preview: Apologies for any confusion earlier. Let me elaborate on the topic at hand. As a therapist, it is es...
+
+============================================================
+  BASELINE TESTING COMPLETE
+  Results saved to: /Users/sparrowpanton/Documents/MadTheologyLLM/data/baseline/baseline_20260326_193607.jsonl
+  Total runs: 100
+============================================================
+
+=============
+  BASELINE TESTING COMPLETE
+  Results saved to: /Users/sparrowpanton/Documents/MadTheologyLLM/data/baseline/baseline_20260326_193529.jsonl
+  Total runs: 100
+============================================================
+
