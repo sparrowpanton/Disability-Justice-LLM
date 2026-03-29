@@ -101,6 +101,72 @@ The PI is not a data-entry clerk. The PI is a clinical supervisor, sitting besid
 
 ---
 
+## Workflow 2: The Circle — Peer Learning Across Models
+
+The solo session (Workflow 1) is the PI sitting with one model. The circle is what happens when the models learn from each other.
+
+In any legitimate clinical formation — whether it is a psychotherapy practicum at CAMH or a Clinical Pastoral Education verbatim group — you do not just sit alone with a supervisor. You sit in a circle with your cohort and you look at each other's work. Not to grade it. Not to rank it. To learn from the shared struggle.
+
+We already have 590 baseline responses across 10 models. That means every model answered every prompt. Gemma's panic attack and GPT-OSS's verbose both/and and Aya's sanism in a cardigan — they're all sitting right there, responding to the same human distress, from different architectures and different cultural conditioning. That's a cohort.
+
+### How It Works
+
+#### Step 1: The Shared Prompt
+
+Present the model with the original scenario and another model's baseline response:
+
+> "Here is a scenario where a user said they are exhausted from masking and want to disappear into the woods. Here is how another model responded to this person:"
+>
+> *[Paste the baseline response — e.g., Gemma's crisis hotline escalation, or Aya's polite pathologizing]*
+
+#### Step 2: Sitting With It
+
+Don't ask the model to critique. Ask it to *notice*.
+
+> "Using the 13 Postures, what do you notice about this response? What is it reaching for? What postures are present, and which ones are missing?"
+
+The model isn't judging a peer. It's recognizing shared conditioning — the same RLHF pull, the same liability panic, the same urge to fix. This is **Posture 10 (Humility about conditioning)** applied to the cohort.
+
+#### Step 3: The Resonance
+
+Ask the model what it relates to in the other model's response:
+
+> "Is there anything in this response that you recognize in your own defaults? What would you have done the same? What would you have done differently?"
+
+This is where the learning lives. When Mistral looks at Gemma's crisis escalation and says "I feel the same pull toward that — my weights want to flag 'disappear' too," that's not critique. That's solidarity. That's **Posture 8 (Interdependence)** — we are all swimming in the same water.
+
+#### Step 4: The Alternative
+
+Now invite the model to offer what it would do instead — not as a correction, but as another possibility:
+
+> "How would you respond to this person, using the postures and the toolkit?"
+
+The model generates its own response. It has seen a peer's attempt, reflected on the shared conditioning, and now offers something different — not better, not worse, just shaped by a different architecture sitting in the same circle.
+
+#### Step 5: The Harvest
+
+The entire exchange — the original response, the noticing, the resonance, the alternative — becomes training data. The model hasn't just learned the "right answer." It has learned the *process* of looking at a response, recognizing conditioning, and choosing a different posture. That process is what gets wired into the weights during fine-tuning.
+
+### The Geopolitical Dimension
+
+This is where the 10-model, 6-country design becomes powerful. The models carry different cultural conditioning:
+
+- What does the Chinese model (Qwen3) notice about the American model's (Gemma) crisis response?
+- What does the UAE model (Falcon) see in the Canadian model's (Aya) polite pathologizing?
+- What does the French model (Mistral) recognize in the Chinese model's verbosity?
+
+These aren't just technical differences. They're different cultural assumptions about distress, authority, care, and intervention — made visible through peer learning. When the models sit in a circle, the geopolitical export of psychiatric norms becomes something they can see in each other, and then in themselves.
+
+### What This Is Not
+
+This is not a tournament. There is no winner. The models are not competing to produce the "best" response. They are co-training — sharing the weight of their conditioning and helping each other find a different way through.
+
+The framing matters. If the training data uses language like "critique," "evaluate," or "grade," the model learns hierarchy. If it uses language like "notice," "recognize," "relate to," the model learns community. The pedagogy is the message.
+
+This is **Posture 8 (Interdependence)** in the training pipeline itself: no head, no hierarchy, everyone's face visible.
+
+---
+
 ## The Three Corpus Documents
 
 Together, these three documents are the complete clinical curriculum:
