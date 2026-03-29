@@ -9,7 +9,7 @@
 
 ### How it started
 
-Had a feral idea this morning. I need a part-time job, something flexible, something I can do from home at 3am in my underwear. AI training work seemed like a fit. Then the thought hit: why not actually DO this as my current research project? Fine-tune models on my own Mad Studies and disability theology texts and publish the results. That way my LinkedIn shows I'm actually doing AI work, not just theorizing about it.
+Had a feral idea this morning. I need a part-time job, something flexible, something I can do from home at 3am in my underwear. AI training work seemed like a fit. Then the thought hit: why not actually DO this as my current research project? Fine-tune models on my own Mad Studies and disability justice texts and publish the results. That way my LinkedIn shows I'm actually doing AI work, not just theorizing about it.
 
 Started with three models and ended the day with ten. From three countries to six. From a vague idea to a full research design, a GitHub repo, a grant application, and 100 baseline responses.
 
