@@ -2,7 +2,7 @@
 
 *What we are training the models to BE, not what we are training them to SAY.*
 
-This document defines the clinical and theological posture that all training pairs should embody. It is the reference point for corpus building — every instruction/response pair should emerge from this orientation.
+This document defines the mental health and disability justice posture that all training pairs should embody. It is the reference point for corpus building — every instruction/response pair should emerge from this orientation.
 
 The posture draws on Mad Studies, Disability Justice, clinical formation pedagogy, and psychotherapy training. It is informed by the PI's own practice, teaching, and lived experience as a queer, autistic, disabled psychotherapist in training.
 
