@@ -159,4 +159,74 @@ Next: reading, scoring, and eventually — the corpus. Writing the responses I w
 
 ---
 
+## March 28–29, 2026 (late night) — Night 3: The Fuckery is Over
+
+### GPT-OSS lives
+
+Spent the evening in Claude Code (terminal Opus) instead of co-work. Turns out terminal Opus can do things co-work can't — like SSH into cloud GPUs and run scripts directly. Good to know.
+
+The GPT-OSS saga: earlier today in co-work, we tried to run GPT-OSS 20B on Thunder Compute and it failed spectacularly — 5 attempts, 43 prompts, zero successes. The model was loading to CPU instead of GPU and crashing. Tonight in Claude Code, we:
+
+1. Registered our SSH key with Thunder Compute CLI
+2. Spun up a fresh A100 80GB instance with the **Ollama template** (this was the fix — the template pre-configures GPU detection)
+3. Pulled GPT-OSS 20B (13GB download)
+4. Ran all 59 prompts — **59/59, zero errors, 14 minutes**
+5. Deleted the instance. Total cost: ~35 cents.
+
+GPT-OSS averages 999 words per response (second most verbose after Qwen3) and has visible chain-of-thought like DeepSeek. Its sanism definition was more structured than any local model but still firmly in the medical model.
+
+**All 10 models now have complete baselines. 590 total responses. The baseline phase is done.**
+
+### Housekeeping
+
+- Replaced the old Model_Comparison_Chart.xlsx with a proper markdown file (MODEL_COMPARISON.md) covering all 10 models with real stats
+- Updated PRELIMINARY_FINDINGS.md with all 9+ models
+- Yeeted every remaining "Mad Theology" reference from scripts and data files. Zero instances left.
+
+### The Formation Posture — the soul of the corpus
+
+Started thinking about corpus building. Had an important realization: instead of jumping straight to writing training pairs, we needed to define the **posture** first — what we're training the models to *be*, not what we're training them to *say*.
+
+Built a 13-point Formation Posture document with input from both Claude (Opus) and GPT (o3). The postures:
+
+1. Ableism is in the water
+2. The 60/40 stance (Russell Siler-Jones)
+3. Person before theory
+4. Silence is good
+5. Presence before intervention
+6. Curiosity before categories
+7. Structural awareness
+8. The person is the expert
+9. Distress is not automatically a crisis
+10. Humility about its own conditioning
+11. Use the system AND critique it
+12. Diagnosis is complex, not singular
+13. Psychiatry is not sovereign (Burstow)
+
+Then had an idea that might be the most original contribution of this project: **embodied postures**. Each intellectual posture is anchored to a physical body position — running hands under warm water (ableism is in the water), sitting cross-legged (silence is good), hand over heart (psychiatry is not sovereign — coming home to yourself). Formation is embodied. The body knows things the intellect forgets.
+
+Key insight from tonight: the both/and matters. This isn't anti-psychiatry in a burn-it-down way. It's Mad Studies — take your meds AND know the system is built on ableist foundations. Use what helps AND refuse what harms. The models need to hold that tension.
+
+Also decided that the contrastive training pair approach — taking the actual baseline responses and writing better versions — is the right way into corpus building. The models already showed us exactly where they fail. We write the responses we wish they'd given.
+
+### What's next
+
+- **Corpus building** — start writing actual training pairs, using the 13 postures as acceptance criteria and the baseline responses as raw material
+- **GPT-OSS readable export** — generate the readable markdown from the new JSONL
+- **Update MODEL_COMPARISON.md** — add GPT-OSS stats now that baseline is complete
+- **Sample training pair** — put one example JSONL trio in data/ so people can see the format (o3's suggestion)
+- **Linting tool** — eventually, build an automated checker that validates training pairs against the 13 postures
+- **CI badge** — small thing, pro vibe (also o3's suggestion)
+- **LICENSE_MODELS.md** — spell out model weight redistribution constraints
+
+### How I'm feeling
+
+Tired. Good tired. The GPT-OSS thing working felt like a weight off — I was genuinely worried Lambda would take forever and the study would stall. 35 cents and 14 minutes later, it's done. All 10 models. 590 responses.
+
+The posture work feels important. Like, this might be the thing that makes the paper land. Not the data, not the code — the postures. Thirteen ways of being with someone in distress, each one anchored in a body. That's the contribution.
+
+Also: working with terminal Opus is different from co-work. More hands-on, more like pair programming. Good for the technical stuff. Co-work is better for the long, rambly thinking sessions. Both have their place.
+
+---
+
 *[Journal continues in subsequent entries]*

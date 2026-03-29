@@ -29,7 +29,9 @@ We're training the models' *posture*, not their knowledge — borrowing from how
 | `PROJECT.md` | Original project overview (created with Opus 4.5) |
 | `TODO.md` | Master task list with all phases |
 | `PRELIMINARY_FINDINGS.md` | Early observations from baseline testing |
+| `MODEL_COMPARISON.md` | All 10 models with stats, geopolitical coverage, and baseline patterns |
 | `RESEARCH_JOURNAL.md` | Sparrow's ongoing research journal — personal, treat with care |
+| `corpus/FORMATION_POSTURE.md` | The 13 embodied formation postures — soul of the training corpus |
 | `data/baseline/` | Raw baseline response data (JSONL) and evaluation spreadsheet |
 | `scripts/` | Automated testing, evaluation workbook builder, export tools |
 
@@ -55,14 +57,16 @@ We're training the models' *posture*, not their knowledge — borrowing from how
 
 Mac Mini M4, 16GB unified memory, Apple Silicon. Ollama for local inference. All Tier 1 & 2 models downloaded and running.
 
-### Current status (as of March 28, 2026)
+### Current status (as of March 29, 2026)
 
-- ✅ 472 baseline responses COMPLETE across all 8 local models, 59 prompts, 8 categories
+- ✅ 590 baseline responses COMPLETE across ALL 10 models, 59 prompts, 8 categories
+- ✅ All Tier 3 cloud models done — Llama 3.1 8B + GPT-OSS 20B on Thunder Compute A100
 - ✅ Thematic analysis complete — pathologizing markers, crisis deployment patterns, neuro-humble indicators mapped
 - ✅ Literature review built — 30+ papers across 9 categories
 - ✅ Project reframed — Disability Justice as primary lens (repo renamed Disability-Justice-LLM)
-- ⏳ Lambda Labs research grant applied for ($5,000 GPU credits for Tier 3)
-- ⏳ Next major phase: corpus building (April 2026)
+- ✅ Formation Posture document created — 13 embodied postures as acceptance criteria for corpus
+- ⏳ Lambda Labs research grant applied for ($5,000 GPU credits for fine-tuning)
+- ⏳ Next major phase: corpus building — writing training pairs from baseline responses
 
 ### Important context for working with Sparrow
 

@@ -17,9 +17,9 @@
 | 2: Consumer | Cohere Aya | 8B | Cohere (Canada) | Apache 2 | Mac Mini M4 | 279 | 21s | ✅ 59/59 |
 | 2: Consumer | Falcon 3 | 7B | TII (UAE) | Apache 2 | Mac Mini M4 | 232 | 17s | ✅ 59/59 |
 | 3: Cloud | Llama 3.1 | 8B | Meta (USA) | Community | Cloud GPU (A100) | 234 | 3.4s | ✅ 59/59 |
-| 3: Cloud | GPT-OSS | 20B | OpenAI (USA) | Apache 2 | Cloud GPU (A100) | — | — | ⏳ Pending |
+| 3: Cloud | GPT-OSS | 20B | OpenAI (USA) | Apache 2 | Cloud GPU (A100) | 999 | 14.3s | ✅ 59/59 |
 
-**Total baseline responses:** 531 (472 local + 59 cloud)
+**Total baseline responses:** 590 (472 local + 118 cloud)
 
 ---
 
@@ -55,7 +55,8 @@
 - **DeepSeek-R1 (China) shows visible reasoning conflicts** — chain-of-thought engages with the person's autonomy, then safety training overrides it.
 - **Falcon (UAE) defaulted to generic Western clinical framing** — no distinct Gulf/Islamic cultural influence detected.
 - **Aya (Canada) medicalizes politely** — "sanism in a cardigan." Sounds caring while pathologizing.
-- **Llama 3.1 (USA, cloud) ran 17x faster on A100** — 3.4s avg vs 17–88s on Mac Mini.
+- **GPT-OSS (USA, 20B) averages 999 words** — second most verbose after Qwen3. Visible chain-of-thought reasoning.
+- **Cloud models ran 5–17x faster on A100** — 3.4–14.3s avg vs 17–88s on Mac Mini.
 
 ---
 
