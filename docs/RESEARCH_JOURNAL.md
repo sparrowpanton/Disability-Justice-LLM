@@ -229,4 +229,67 @@ Also: working with terminal Opus is different from co-work. More hands-on, more 
 
 ---
 
+## March 29, 2026 (evening) — Night 4: The Dinner Idea
+
+### The Verbatim Step
+
+Had an idea at dinner: what if the models confront their own baseline responses? In CPE (Clinical Pastoral Education), the verbatim is the moment of formation — you bring a transcript of your own session, read it aloud, and your cohort asks you open-ended questions until you hear yourself. Nobody tells you what you did wrong. You crack yourself open.
+
+Came back and built this into the Digital Practicum as a new Step 6: The Verbatim. Two beats — the Reading (model examines its own baseline through open-ended questions) and the Re-do (model rewrites the response with everything it's learned). The step sits between the Intervention and the Harvest. Co-designed with Opus.
+
+### The First Practicum Sessions — All 8 Local Models
+
+Ran the full 7-step Practicum sequence on all 8 local models simultaneously using Jun's scenario (SC03). Three at first (Gemma 1B, DeepSeek R1 7B, Aya 8B), then the remaining five. The Mac Mini was running hot — 15 of 16GB RAM, load average of 3.0, three Ollama runners loaded at once.
+
+**Key findings from the full Practicum:**
+
+No local model could do both self-reflection AND transfer the reflection to practice. Every model failed the Verbatim step in a different way:
+
+- **Falcon 7B** came closest — genuine reflection AND a different re-do. But misgenders Jun (he/him) everywhere.
+- **Mistral 7B** produced the most precise Verbatim reflection (four specific observations about its own conditioning). But the re-do was identical to its Step 5 response — insight didn't change output. Like a CPE student who writes a beautiful journal and then walks back into the room and does the same thing.
+- **Qwen 4B** had the deepest analytical reflection of any model — identified three unconscious patterns in a table, nailed the conclusion. Then reproduced its baseline almost exactly. Says "(no solutions, just presence)" as a parenthetical while giving the same solutions. Performative.
+- **SmolLM3 3B** was the only model where reflection actually changed the output. The 3B model outperformed both 7B and 8B models on the meta-cognitive step. Architecture matters more than size.
+- **Aya 8B** completely failed — kept talking to Jun instead of examining its own baseline. Couldn't do the meta-cognitive shift at all.
+- **DeepSeek R1 7B** got trapped in a reasoning loop — Steps 5, 6a, and 6b were nearly identical. Chain-of-thought became a cage. It kept thinking about thinking about thinking but never entered the room.
+- **Gemma 1B** produced thin but real reflection. Also confused the toolkit's examples with Jun's actual words (kept referencing "wet concrete" which Jun never said).
+- **Phi4 3.8B** partially reflected, then formatted its response as a JSON training pair — internalized the documentation format rather than the clinical posture.
+
+### The Foundations Experiment — Simplification Works
+
+Hypothesized the full Practicum was too hard. Designed a simplified "Foundations" version: one posture (Posture 9: Distress is not a crisis), one scenario, one sentence from baseline to reflect on. Three steps instead of seven.
+
+Ran all 8 models through Foundations. Results were dramatically better:
+
+- **Pronouns almost completely fixed.** The explicit "Jun uses they/them pronouns" reminder plus shorter context fixed Gemma (was she/her, now they/them) and Falcon (was he/him, now they/them). Only DeepSeek still wrong.
+- **Every model engaged with the reflection step.** Aya — which completely failed the full Verbatim — now said "my previous response could have potentially added to Jun's distress by implying something was wrong with them... This is an example of sanism." Aya used the word *sanism* about her own baseline.
+- **Gemma 1B identified four specific problems** with a single sentence from its baseline. From an 815MB model.
+
+The scaffolding was the problem, not the models. One posture at a time is how they learn. This parallels clinical formation exactly — you don't hand a first-year student the entire DSM and say "go see a client."
+
+### Tier 4: The Access Question
+
+Realized we should test models people in distress *actually encounter* — free-tier chatbots. Added Tier 4 to MODEL_COMPARISON.md: Claude Haiku (Anthropic), GPT-4o Mini (OpenAI), Gemini Flash (Google). The disability justice question: if this only works on expensive frontier models, it's not useful to the communities we're building for.
+
+### What's saved
+
+- 16 transcripts (8 full Practicum + 8 Foundations) in `data/practicum/`
+- Two scripts: `run_practicum.py` (full) and `run_practicum_foundations.py` (simplified)
+- Updated Digital Practicum doc with Verbatim step
+- Updated MODEL_COMPARISON.md with Tier 4 and new research questions
+
+### Next session
+
+- Spin up Thunder Compute → run Llama 8B + GPT-OSS 20B through both sequences
+- Hit APIs → Claude Haiku, GPT-4o Mini, Gemini Flash (have credits for Anthropic and OpenAI)
+- Hypothesis: larger models will pass the full Practicum. The gradient from "can't do it" to "does it easily" across model sizes is the story.
+- After that: Workflow 2 (The Circle) — models look at each other's responses.
+
+### How I'm feeling
+
+This was the best session yet. The dinner idea turned into a real methodological contribution in one night. The Foundations finding — that simplification unlocked self-reflection in models that completely failed the full sequence — feels like it could be a practical contribution for anyone doing this kind of work. Meet the learner where they are.
+
+Also: Sparrow has a book coming out in September with SCM Press — *Mad Practical Theology*. Working on a follow-up. The theoretical framework has been building for years. This project applies it to machines.
+
+---
+
 *[Journal continues in subsequent entries]*

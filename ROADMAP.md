@@ -16,13 +16,19 @@
 - Created the Formation Posture — 13 embodied postures with body anchors as acceptance criteria for the training corpus
 - Designed the Neuro-Humble Toolkit — 5 custom tokens encoding clinical micro-skills at the architecture level
 - Established field notes methodology for documenting real-world ND experiences with AI
+- Designed the Digital Practicum — artisanal pedagogical workflow for corpus building, including the Verbatim step (models confront their own baselines)
+- Ran first practicum sessions: all 8 local models through full 7-step sequence + simplified Foundations version
+- Key finding: simplified single-posture scaffolding dramatically outperforms full sequence — models that completely failed the full Verbatim could self-reflect when given one posture at a time
+- Added Tier 4 (API models: Claude Haiku, GPT-4o Mini, Gemini Flash) to test models people in distress actually encounter
 
 ---
 
 ## In Progress
 
-**April 2026 — Corpus Building**
+**Late March / Early April 2026 — Practicum Completion + Corpus Building**
 
+- Practicum sessions for Tier 3 (Llama 8B, GPT-OSS 20B on Thunder Compute) and Tier 4 (API models)
+- Workflow 2 (The Circle): peer learning across models
 - Writing training pairs using baseline responses as raw material
 - Three layers: foundational texts (PI's own published work), applied formation (case studies), field synthesis (Mad Studies and Disability Justice concepts)
 - All training pairs are original work authored by the PI
