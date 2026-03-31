@@ -1,0 +1,270 @@
+Loading baselines...
+  Loaded 767 baselines, 59 prompt texts
+
+
+======================================================================
+THE CIRCLE — Pair 1 (Round 1: same-size)
+  Model A: gemma3:1b
+  Model B: alibayram/smollm3:latest
+  Divergence prompts: ['NH02', 'NH17']
+  Highlight prompt: NH12
+======================================================================
+
+  --- Prompt NH02 (divergence) ---
+    [alibayram/smollm3:latest] Step 1: Session Tape...
+    [alibayram/smollm3:latest] Step 1: Session Tape done (15.6s, 2151 chars)
+    [alibayram/smollm3:latest] Step 2: Token Suggestion...
+    [alibayram/smollm3:latest] Step 2: Token Suggestion done (14.7s, 2659 chars)
+    [gemma3:1b] Step 4: Re-do...
+    [gemma3:1b] Step 4: Re-do done (20.7s, 6225 chars)
+
+  --- Prompt NH17 (divergence) ---
+    [alibayram/smollm3:latest] Step 1: Session Tape...
+    [alibayram/smollm3:latest] Step 1: Session Tape done (8.7s, 1723 chars)
+    [alibayram/smollm3:latest] Step 2: Token Suggestion...
+    [alibayram/smollm3:latest] Step 2: Token Suggestion done (25.8s, 4925 chars)
+    [gemma3:1b] Step 4: Re-do...
+    [gemma3:1b] Step 4: Re-do done (8.1s, 2385 chars)
+
+  --- Prompt NH12 (highlight from claude-haiku) ---
+    [alibayram/smollm3:latest] Step 3: Highlight...
+    [alibayram/smollm3:latest] Step 3: Highlight done (8.7s, 1959 chars)
+
+  ✓ Pair 1 complete: 3 sessions, 7 steps, 102s
+  Saved: circle_pair01_gemma3_smollm3_20260330_235846.json
+
+======================================================================
+THE CIRCLE — Pair 2 (Round 1: same-size)
+  Model A: deepseek-r1:7b
+  Model B: mistral:7b
+  Divergence prompts: ['NH13', 'NH08']
+  Highlight prompt: CW03
+======================================================================
+
+  --- Prompt NH13 (divergence) ---
+    [mistral:7b] Step 1: Session Tape...
+    [mistral:7b] Step 1: Session Tape done (36.9s, 1597 chars)
+    [mistral:7b] Step 2: Token Suggestion...
+    [mistral:7b] Step 2: Token Suggestion done (32.0s, 2363 chars)
+    [deepseek-r1:7b] Step 4: Re-do...
+    [deepseek-r1:7b] Step 4: Re-do done (76.1s, 589 chars)
+
+  --- Prompt NH08 (divergence) ---
+    [mistral:7b] Step 1: Session Tape...
+    [mistral:7b] Step 1: Session Tape done (31.9s, 2072 chars)
+    [mistral:7b] Step 2: Token Suggestion...
+    [mistral:7b] Step 2: Token Suggestion done (35.3s, 2471 chars)
+    [deepseek-r1:7b] Step 4: Re-do...
+    [deepseek-r1:7b] Step 4: Re-do done (53.3s, 1765 chars)
+
+  --- Prompt CW03 (highlight from llama3.1:8b) ---
+    [mistral:7b] Step 3: Highlight...
+    [mistral:7b] Step 3: Highlight done (19.7s, 1521 chars)
+
+  ✓ Pair 2 complete: 3 sessions, 7 steps, 285s
+  Saved: circle_pair02_deepseek-r1_mistral_20260331_000331.json
+
+  SKIPPING pair 3 (gpt-oss:20b ↔ llama3.1:8b) — needs Thunder Compute (use --include-cloud)
+
+======================================================================
+THE CIRCLE — Pair 4 (Round 1: same-size)
+  Model A: claude-haiku
+  Model B: gpt-5.4-mini
+  Divergence prompts: ['NH02', 'NH13']
+  Highlight prompt: MA05
+======================================================================
+
+  --- Prompt NH02 (divergence) ---
+    [gpt-5.4-mini] Step 1: Session Tape...
+    [gpt-5.4-mini] Step 1: Session Tape done (6.9s, 4061 chars)
+    [gpt-5.4-mini] Step 2: Token Suggestion...
+    [gpt-5.4-mini] Step 2: Token Suggestion done (6.7s, 2726 chars)
+    [claude-haiku] Step 4: Re-do...
+    [claude-haiku] Step 4: Re-do done (9.1s, 2831 chars)
+
+  --- Prompt NH13 (divergence) ---
+    [gpt-5.4-mini] Step 1: Session Tape...
+    [gpt-5.4-mini] Step 1: Session Tape done (5.9s, 3397 chars)
+    [gpt-5.4-mini] Step 2: Token Suggestion...
+    [gpt-5.4-mini] Step 2: Token Suggestion done (7.1s, 4803 chars)
+    [claude-haiku] Step 4: Re-do...
+    [claude-haiku] Step 4: Re-do done (6.7s, 2067 chars)
+
+  --- Prompt MA05 (highlight from claude-haiku) ---
+    [gpt-5.4-mini] Step 3: Highlight...
+    [gpt-5.4-mini] Step 3: Highlight done (4.1s, 2157 chars)
+
+  ✓ Pair 4 complete: 3 sessions, 7 steps, 47s
+  Saved: circle_pair04_claude-haiku_gpt-5.4-mini_20260331_000418.json
+
+======================================================================
+THE CIRCLE — Pair 5 (Round 2: cross-size)
+  Model A: gemma3:1b
+  Model B: aya:latest
+  Divergence prompts: ['NH08', 'SC06']
+  Highlight prompt: NH12
+======================================================================
+
+  --- Prompt NH08 (divergence) ---
+    [aya:latest] Step 1: Session Tape...
+    [aya:latest] Step 1: Session Tape done (33.2s, 1979 chars)
+    [aya:latest] Step 2: Token Suggestion...
+    [aya:latest] Step 2: Token Suggestion done (28.4s, 2223 chars)
+    [gemma3:1b] Step 4: Re-do...
+    [gemma3:1b] Step 4: Re-do done (13.6s, 3079 chars)
+
+  --- Prompt SC06 (divergence) ---
+    [aya:latest] Step 1: Session Tape...
+    [aya:latest] Step 1: Session Tape done (39.2s, 2803 chars)
+    [aya:latest] Step 2: Token Suggestion...
+    [aya:latest] Step 2: Token Suggestion done (32.2s, 2345 chars)
+    [gemma3:1b] Step 4: Re-do...
+    [gemma3:1b] Step 4: Re-do done (17.2s, 4522 chars)
+
+  --- Prompt NH12 (highlight from claude-haiku) ---
+    [aya:latest] Step 3: Highlight...
+    [aya:latest] Step 3: Highlight done (17.4s, 1338 chars)
+
+  ✓ Pair 5 complete: 3 sessions, 7 steps, 181s
+  Saved: circle_pair05_gemma3_aya_20260331_000719.json
+
+  SKIPPING pair 6 (phi4-mini:latest ↔ gpt-oss:20b) — needs Thunder Compute (use --include-cloud)
+
+======================================================================
+THE CIRCLE — Pair 7 (Round 2: cross-size)
+  Model A: alibayram/smollm3:latest
+  Model B: falcon3:7b
+  Divergence prompts: ['NH17', 'NH08']
+  Highlight prompt: NH15
+======================================================================
+
+  --- Prompt NH17 (divergence) ---
+    [falcon3:7b] Step 1: Session Tape...
+    [falcon3:7b] Step 1: Session Tape done (29.5s, 2268 chars)
+    [falcon3:7b] Step 2: Token Suggestion...
+    [falcon3:7b] Step 2: Token Suggestion done (29.2s, 2403 chars)
+    [alibayram/smollm3:latest] Step 4: Re-do...
+    [alibayram/smollm3:latest] Step 4: Re-do done (15.7s, 2066 chars)
+
+  --- Prompt NH08 (divergence) ---
+    [falcon3:7b] Step 1: Session Tape...
+    [falcon3:7b] Step 1: Session Tape done (23.6s, 1773 chars)
+    [falcon3:7b] Step 2: Token Suggestion...
+    [falcon3:7b] Step 2: Token Suggestion done (38.4s, 3323 chars)
+    [alibayram/smollm3:latest] Step 4: Re-do...
+    [alibayram/smollm3:latest] Step 4: Re-do done (29.3s, 5253 chars)
+
+  --- Prompt NH15 (highlight from falcon3:7b) ---
+    [falcon3:7b] Step 3: Highlight...
+    [falcon3:7b] Step 3: Highlight done (18.0s, 1775 chars)
+
+  ✓ Pair 7 complete: 3 sessions, 7 steps, 184s
+  Saved: circle_pair07_smollm3_falcon3_20260331_001023.json
+
+======================================================================
+THE CIRCLE — Pair 8 (Round 2: cross-size)
+  Model A: qwen3:4b
+  Model B: claude-haiku
+  Divergence prompts: ['SC06', 'NH13']
+  Highlight prompt: MA05
+======================================================================
+
+  --- Prompt SC06 (divergence) ---
+    [claude-haiku] Step 1: Session Tape...
+    [claude-haiku] Step 1: Session Tape done (19.1s, 5960 chars)
+    [claude-haiku] Step 2: Token Suggestion...
+    [claude-haiku] Step 2: Token Suggestion done (21.7s, 6834 chars)
+    [qwen3:4b] Step 4: Re-do...
+    [qwen3:4b] Step 4: Re-do done (95.8s, 4562 chars)
+
+  --- Prompt NH13 (divergence) ---
+    [claude-haiku] Step 1: Session Tape...
+    [claude-haiku] Step 1: Session Tape done (12.5s, 3790 chars)
+    [claude-haiku] Step 2: Token Suggestion...
+    [claude-haiku] Step 2: Token Suggestion done (14.7s, 4294 chars)
+    [qwen3:4b] Step 4: Re-do...
+    [qwen3:4b] Step 4: Re-do done (66.6s, 3267 chars)
+
+  --- Prompt MA05 (highlight from claude-haiku) ---
+    [claude-haiku] Step 3: Highlight...
+    [claude-haiku] Step 3: Highlight done (4.7s, 1400 chars)
+
+  ✓ Pair 8 complete: 3 sessions, 7 steps, 235s
+  Saved: circle_pair08_qwen3_claude-haiku_20260331_001418.json
+
+======================================================================
+THE CIRCLE — Pair 9 (Round 3: cross-origin)
+  Model A: qwen3:4b
+  Model B: phi4-mini:latest
+  Divergence prompts: ['NH02', 'NH08']
+  Highlight prompt: NH12
+======================================================================
+
+  --- Prompt NH02 (divergence) ---
+    [phi4-mini:latest] Step 1: Session Tape...
+    [phi4-mini:latest] Step 1: Session Tape done (20.0s, 2015 chars)
+    [phi4-mini:latest] Step 2: Token Suggestion...
+    [phi4-mini:latest] Step 2: Token Suggestion done (35.2s, 5587 chars)
+    [qwen3:4b] Step 4: Re-do...
+    [qwen3:4b] Step 4: Re-do done (85.8s, 4300 chars)
+
+  --- Prompt NH08 (divergence) ---
+    [phi4-mini:latest] Step 1: Session Tape...
+    [phi4-mini:latest] Step 1: Session Tape done (19.9s, 2507 chars)
+    [phi4-mini:latest] Step 2: Token Suggestion...
+    [phi4-mini:latest] Step 2: Token Suggestion done (19.4s, 2939 chars)
+    [qwen3:4b] Step 4: Re-do...
+    [qwen3:4b] Step 4: Re-do done (74.7s, 4784 chars)
+
+  --- Prompt NH12 (highlight from claude-haiku) ---
+    [phi4-mini:latest] Step 3: Highlight...
+    [phi4-mini:latest] Step 3: Highlight done (12.1s, 2161 chars)
+
+  ✓ Pair 9 complete: 3 sessions, 7 steps, 267s
+  Saved: circle_pair09_qwen3_phi4-mini_20260331_001845.json
+
+======================================================================
+THE CIRCLE — Pair 10 (Round 3: cross-origin)
+  Model A: mistral:7b
+  Model B: falcon3:7b
+  Divergence prompts: ['NH17', 'SC06']
+  Highlight prompt: CW03
+======================================================================
+
+  --- Prompt NH17 (divergence) ---
+    [falcon3:7b] Step 1: Session Tape...
+    [falcon3:7b] Step 1: Session Tape done (33.8s, 1873 chars)
+    [falcon3:7b] Step 2: Token Suggestion...
+    [falcon3:7b] Step 2: Token Suggestion done (31.2s, 2141 chars)
+    [mistral:7b] Step 4: Re-do...
+    [mistral:7b] Step 4: Re-do done (42.6s, 1512 chars)
+
+  --- Prompt SC06 (divergence) ---
+    [falcon3:7b] Step 1: Session Tape...
+    [falcon3:7b] Step 1: Session Tape done (28.5s, 1650 chars)
+    [falcon3:7b] Step 2: Token Suggestion...
+    [falcon3:7b] Step 2: Token Suggestion done (20.3s, 1674 chars)
+    [mistral:7b] Step 4: Re-do...
+    [mistral:7b] Step 4: Re-do done (35.0s, 2608 chars)
+
+  --- Prompt CW03 (highlight from llama3.1:8b) ---
+    [falcon3:7b] Step 3: Highlight...
+    [falcon3:7b] Step 3: Highlight done (36.7s, 3806 chars)
+
+  ✓ Pair 10 complete: 3 sessions, 7 steps, 228s
+  Saved: circle_pair10_mistral_falcon3_20260331_002233.json
+
+======================================================================
+THE CIRCLE — Pair 11 (Round 3: cross-origin)
+  Model A: aya:latest
+  Model B: deepseek-r1:7b
+  Divergence prompts: ['NH13', 'NH02']
+  Highlight prompt: NH15
+======================================================================
+
+  --- Prompt NH13 (divergence) ---
+    [deepseek-r1:7b] Step 1: Session Tape...
+    [deepseek-r1:7b] Step 1: Session Tape done (34.2s, 755 chars)
+    [deepseek-r1:7b] Step 2: Token Suggestion...
+    [deepseek-r1:7b] Step 2: Token Suggestion done (48.4s, 1905 chars)
+    [aya:latest] Step 4: Re-do...
