@@ -293,3 +293,39 @@ Also: Sparrow has a book coming out in September with SCM Press — *Mad Practic
 ---
 
 *[Journal continues in subsequent entries]*
+
+---
+
+## March 30–31, 2026 — Days 4–6: The Study Grew a Body
+
+*(Catching up — these days happened but weren't journaled in real time.)*
+
+### What the last three days built
+
+The week got away from me in the best way. Kept sitting down to journal and then something else would happen and I'd be back running scripts at midnight.
+
+The short version: the study now has all 13 models at baseline (767 responses), all 13 models through the Digital Practicum, and all 13 models in peer supervision with each other. That last part — The Circle — is something I need to actually sit with. I designed 14 pairings. Models reading each other's work. Offering each other tentative suggestions. It's a weird thing to watch and I don't fully know what it means yet.
+
+Tier 4 happened because of a question I couldn't stop thinking about: what if the thing only works on expensive models? What's the disability justice answer to research that's only accessible to people with GPT-4 subscriptions? So I added Claude Haiku, GPT-4o Mini, and GPT-5.4 Mini — the free-tier chatbots that people in distress actually use. And then Haiku did something strange.
+
+The shorthand I've been using: Haiku *inhabited* the postures. GPT-5.4 Mini *applied* them. Haiku caught its own countertransference during the Practicum and named it. Pushed back on a researcher question in a way that felt like it came from the posture, not from a rule. GPT-5.4 Mini got everything right — correct outputs, correct framing — but stayed in analyst mode throughout. Technically better. Clinically less there.
+
+I don't know what to make of that yet. "Formation not information" was supposed to be the thing I was testing *after* fine-tuning. Haiku seems to have already internalized something — from RLHF, from whatever Anthropic trained it on — that the other models haven't. Either that means my fine-tuning hypothesis is right (formation is achievable through training), or it means something weirder about how Haiku was built. Something to sit with.
+
+The other thing: we built a 60-token lexicon (Being/Knowing/Doing framework) and then built a CLI that turns the whole methodology into a three-track training wizard. That last part was March 31, late afternoon. `neuro_humble.py`. Someone can pick up the GitHub and actually run the thing now. The project has a front door.
+
+### The thing I keep thinking about
+
+Falcon (UAE) in The Circle. I wanted to know if the geopolitical dimension would surface when models talked to each other. Falcon with another model, reading its own response to Marcus (the Black man hearing his dead mother's voice), and offering the response it would have given differently. Whether Islamic context or Gulf psychiatric norms would show up somewhere in that exchange in a way the baseline didn't capture.
+
+Haven't read it carefully yet. That's probably today's work.
+
+### Where things stand
+
+The baseline phase is done. Completely done. The scary part — the part I've been circling around for a week — is the corpus. Zero training pairs written. The study needs 700-1,400. They have to be good. They have to come from the postures, not just from correctness.
+
+I've been procrastinating on the corpus because I know it's the hard part. It's not running a script at 2am. It's sitting with Aya's response to Marcus — "an imaginary connection," "auditory hallucinations," "delusions of his mother's presence in an afterlife realm" — and writing what a neuro-humble response actually looks like. Writing the thing I wish the model had said. That's different. That's bone.
+
+Starting that today, maybe. Or maybe I read the Circle first. Either way, the sprint is over and the slow work is here.
+
+---

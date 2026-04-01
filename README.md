@@ -3,21 +3,23 @@
 ### A Disability Justice Approach to Fine-Tuning Language Models for Mental Health and Neurodiversity Contexts
 
 **PI:** Dr. Sparrow (Amy) Panton | Emmanuel College, University of Toronto
-**Status:** Active — Digital Practicum Complete (12 Models, 4 Tiers)
+**Status:** Active — Baseline + Practicum + Peer Supervision Complete (13 Models, 4 Tiers)
 **Started:** March 2026
 
 ---
 
 ## Current Status
 
-✅ 708+ baseline responses collected across 13 models, 59 prompts, 8 categories
+✅ 767+ baseline responses collected across 13 models, 59 prompts, 8 categories
 ✅ All Tier 1–4 models baselined — local (Mac Mini M4), cloud (Thunder Compute A100), and API (Anthropic, OpenAI)
-✅ Digital Practicum complete — 12 models through full formation sequence + simplified foundations
+✅ Digital Practicum complete — 13 models through full formation sequence + simplified foundations
+✅ The Circle complete — 14 peer supervision sessions, all 13 models examining each other's clinical responses
 ✅ Thematic analysis complete — pathologizing markers, crisis deployment patterns, neuro-humble indicators mapped
+✅ Neuro-Humble Lexicon — 60 tokens across Being/Knowing/Doing framework encoding clinical micro-skills at the architecture level
+✅ Neuro-Humble Toolkit CLI — interactive three-track training wizard (Practicum, Tape Review, Synthesizer)
 ✅ Literature review — 30+ papers across critical AI studies, disability justice, and mental health AI
-✅ Neuro-Humble Toolkit — 7 custom tokens encoding clinical micro-skills at the architecture level
-✅ Key finding: formation vs information distinction observable across architectures
-⏳ Corpus building — next phase
+✅ Key finding: formation vs information distinction observable across architectures — Haiku 4.5 *inhabited* postures while GPT-5.4 Mini *applied* them correctly but remained in analyst mode
+⏳ Corpus building — next phase (700–1,400 training pairs)
 ⏳ PI evaluation using 7-dimension neuro-humble rubric
 
 ---
@@ -25,10 +27,13 @@
 ## What This Repo Demonstrates
 
 - **Model evaluation design** — Custom prompt sets and rubrics for assessing LLM behavior in sensitive domains
-- **Baseline testing at scale** — Systematic comparison of 8 models across 59 prompts with automated collection and thematic analysis
+- **Baseline testing at scale** — Systematic comparison of 13 models across 59 prompts with automated collection and thematic analysis
+- **Peer supervision methodology** — Novel workflow where models examine and critique each other's clinical responses (The Circle)
 - **Domain-specific AI safety analysis** — Identifying where "safety" becomes silencing in mental health and disability contexts
+- **Custom token design** — 60-token lexicon encoding clinical micro-skills (Being/Knowing/Doing) at the architecture level
 - **Corpus design methodology** — Building specialized training datasets from original academic texts
 - **LoRA fine-tuning pipeline** — Parameter-efficient fine-tuning on consumer hardware (Mac Mini M4, 16GB)
+- **Interactive CLI toolkit** — Three-track training wizard for human practitioners and researchers
 - **Critical AI ethics** — Applying Disability Justice, Mad Studies, and clinical formation frameworks to AI alignment
 
 ---
@@ -129,7 +134,7 @@ We call this **"formation, not information."**
 
 The formation model draws on training approaches from psychotherapy and interfaith spiritual care education, where clinicians learn not just what to say but how to *be with* someone in distress — an orientation that prioritizes presence over intervention, curiosity over diagnosis, and humility over expertise.
 
-Thirteen language models across four size tiers and six countries of origin are tested — ten open-source models are fine-tuned on a curated corpus of Mad Studies, Disability Justice, and neurodivergent-informed care texts using LoRA (Low-Rank Adaptation). All training data is original work authored by the PI — no copyrighted third-party texts are used in the training corpus.
+Thirteen language models across four size tiers and six countries of origin are tested. Each model completes a Digital Practicum (self-reflective formation sequence), then enters The Circle (peer supervision where models examine each other's clinical responses). Ten open-source models are fine-tuned on a curated corpus of Mad Studies, Disability Justice, and neurodivergent-informed care texts using LoRA (Low-Rank Adaptation). All training data is original work authored by the PI — no copyrighted third-party texts are used in the training corpus.
 
 ## Research Questions
 
@@ -240,7 +245,7 @@ The geopolitical dimension connects to existing critical scholarship on the glob
 
 ## Skills Demonstrated
 
-`model evaluation` · `prompt engineering` · `LoRA / QLoRA fine-tuning` · `corpus design` · `JSONL data pipelines` · `Python scripting` · `bash automation` · `Ollama` · `HuggingFace Transformers` · `thematic analysis` · `AI safety & alignment` · `domain-specific AI ethics` · `research design` · `comparative methodology` · `technical writing`
+`model evaluation` · `prompt engineering` · `LoRA / QLoRA fine-tuning` · `corpus design` · `JSONL data pipelines` · `Python scripting` · `bash automation` · `CLI tool design` · `Ollama` · `HuggingFace Transformers` · `SQLite` · `thematic analysis` · `AI safety & alignment` · `domain-specific AI ethics` · `research design` · `comparative methodology` · `technical writing`
 
 ## Related Work
 
