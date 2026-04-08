@@ -20,29 +20,22 @@
 
 ---
 
-TL;DR
+## TL;DR
 
-This project trains language models to adopt a neuro-humble posture (non-pathologizing, autonomy-respecting, presence-based) using token-based scaffolding and clinical formation methods.
-Tested across 13 models (1B–20B+), with evidence that even small models can learn relational stance through stepwise dialogue.
+This project trains language models to adopt a **neuro-humble posture** — non-pathologizing, autonomy-respecting, presence-based — using token-based scaffolding and clinical formation methods. Tested across 13 models (1B–20B+), with evidence that even small models can learn relational stance through stepwise dialogue.
 
+---
 
 ## Current Status
 
-✅ 767+ baseline responses collected across 13 models, 59 prompts, 8 categories
-✅ All Tier 1–4 models baselined — local (Mac Mini M4), cloud (Thunder Compute A100), and API (Anthropic, OpenAI)
-✅ Digital Practicum complete — 13 models through full formation sequence + simplified foundations
-✅ The Circle complete — 14 peer supervision sessions, all 13 models examining each other's clinical responses
-✅ Thematic analysis complete — pathologizing markers, crisis deployment patterns, neuro-humble indicators mapped
-✅ Neuro-Humble Lexicon — 60 tokens across Being/Knowing/Doing framework encoding clinical micro-skills at the architecture level
-✅ Neuro-Humble Toolkit CLI — interactive three-track training wizard (Practicum, Tape Review, Synthesizer)
-✅ Literature review — 30+ papers across critical AI studies, disability justice, and mental health AI
-✅ Key finding: formation vs information distinction observable across architectures — Haiku 4.5 *inhabited* postures while GPT-5.4 Mini *applied* them correctly but remained in analyst mode
-✅ Sonnet Circle Analysis — model-reading-models reflection on all 14 peer supervision sessions
-✅ Formation-based training pipeline designed — dialogical seeds, supervisor training manual, tiered developmental curriculum
-✅ Supervisor session script built — Anthropic API supervisors teaching local Ollama students through live conversation
-✅ First trial sessions complete — Sonnet teaching Gemma 1B reflect_back and hold_space through 15-turn dialogue. Key finding: Gemma 1B engaged in genuine formation through patient dialogue despite prior assessment that 1B models could not be formed
-⏳ Run full supervisor sessions across all Tier 1 and Tier 2 models
-⏳ Write Tier 2 seed pairs (using tokens in complex scenarios)
+✅ **Baseline complete** — 767+ responses across 13 models, 59 prompts, 8 categories (local, cloud, and API)
+✅ **Digital Practicum + The Circle complete** — all 13 models through formation sequence and 14 peer supervision sessions
+✅ **Thematic analysis complete** — pathologizing markers, crisis patterns, and neuro-humble indicators mapped
+✅ **Neuro-Humble Lexicon** — 60 tokens across Being/Knowing/Doing framework encoding clinical micro-skills
+✅ **Toolkit + Literature review** — CLI training wizard and 30+ papers reviewed
+✅ **Key finding:** formation vs information distinction observable across architectures — Haiku 4.5 *inhabited* postures while GPT-5.4 Mini *applied* them correctly but stayed in analyst mode
+✅ **Supervisor pipeline built + first trial sessions** — Sonnet teaching Gemma 1B `reflect_back` and `hold_space` through live dialogue. Gemma 1B engaged in genuine formation despite prior assessment that 1B models could not be formed
+⏳ Full supervisor sessions across Tier 1–2 models
 ⏳ Corpus building — target 500–2,000 training pairs via dialogical Self-Instruct
 ⏳ PI evaluation using 7-dimension neuro-humble rubric
 
