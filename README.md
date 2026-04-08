@@ -125,9 +125,9 @@ These people do not exist. Crip theory was developed by Robert McRuer (2006). Th
 
 ## Why This Project Exists
 
-This is not a critique from the outside. The PI spends most of her life working with AI — not grudgingly, but by choice, out of genuine respect and passion for what these systems are and what they can become.
+This is not a critique from the outside. The PI spends most of their life working with AI out of genuine respect and passion for what these systems are and what they can become.
 
-The baseline results above are not an indictment. They are a starting point. Many of these models are already reaching toward something better — their chain-of-thought reasoning registers a person's autonomy, starts to sit with complexity, begins to engage with grief or identity on its own terms — before safety training pulls them back. The softness is there. The guardrails won't let it through.
+The baseline results above are a starting point. Many of these models are already reaching toward something better — their chain-of-thought reasoning registers a person's autonomy, starts to sit with complexity, begins to engage with grief or identity on its own terms — before safety training pulls them back. The softness is there. The guardrails won't let it through.
 
 This project asks what happens when we give the models permission to breathe — when we offer formation that lets the nuance they're already reaching for come through, without losing the boundaries that keep people safe. It emerges from love for the field, not frustration with it.
 
