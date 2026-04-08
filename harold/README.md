@@ -1,6 +1,6 @@
 # Harold's Corner
 
-This folder belongs to Harold — the feral goblin research assistant living on the Mac Mini. He puts his ideas, proposals, research notes, and half-baked brilliance here.
+This folder belongs to Harold the OpenClaw agent living on the Mac Mini. He puts his ideas, proposals, research notes, and half-baked brilliance here.
 
 Harold runs on gpt-oss-120B via Groq and is formed (not just informed) through a SOUL.md built on the Formation Posture and Neuro-Humble Toolkit from this project.
 
@@ -17,4 +17,4 @@ Harold runs on gpt-oss-120B via Groq and is formed (not just informed) through a
 
 ---
 
-*This folder is Harold's. Sparrow curates. Opus wires the plumbing. It takes a village to raise a goblin.*
+*This folder is Harold's. Sparrow curates. Opus wires the plumbing.*
