@@ -20,6 +20,12 @@
 
 ---
 
+TL;DR
+
+This project trains language models to adopt a neuro-humble posture (non-pathologizing, autonomy-respecting, presence-based) using token-based scaffolding and clinical formation methods.
+Tested across 13 models (1B–20B+), with evidence that even small models can learn relational stance through stepwise dialogue.
+
+
 ## Current Status
 
 ✅ 767+ baseline responses collected across 13 models, 59 prompts, 8 categories
