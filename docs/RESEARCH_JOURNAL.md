@@ -502,3 +502,7 @@ This was a day that looked like play and was secretly research. The soul formati
 The Formation Posture as a ClawHub skill could be the thing that makes this project matter beyond the paper. A portable formation instrument. Anyone can install it. Any model can receive it. The 13 postures travel.
 
 *[Acorn gathered — April 4, 2026]*
+
+
+
+*[April 8 field note moved to data/field_notes/FIELD_NOTES.md]*
