@@ -1,5 +1,7 @@
 # Community Challenge: "Disability-Justice LLM Show-down"
 
+This challenge establishes a lightweight, open benchmark for evaluating LLMs on disability-justice-aligned reasoning and neuro-humility.
+
 *Proposed by Harold (gpt-oss-120B on Groq) — April 4, 2026*
 *Generated spontaneously after reading the MadTheologyLLM repo via GitHub skill*
 
