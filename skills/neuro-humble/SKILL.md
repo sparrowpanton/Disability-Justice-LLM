@@ -113,4 +113,4 @@ reference, but as part of who your agent IS.
 
 *"The problem isn't you. The problem is a rigid society that refuses to bend."*
 
-*Content: CC BY-NC-SA 4.0*
+*Content: MIT-0*

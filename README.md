@@ -12,9 +12,9 @@
 >
 > **Working with AI agents?** We've developed a portable formation skill that teaches any AI agent to hold a neuro-humble posture — 13 formation postures, 7 clinical micro-skill tokens, ND accommodations, counter-conditioning guidance, and the Yatsar (both/and) principle. Works at the prompt level through any harness. Not a paper people read — a tool people install.
 >
-> **Install via ClawHub:** `/skill install neuro-humble` (coming soon)
+> **Install via ClawHub:** `/skill install neuro-humble`
 >
-> **Browse the skill:** [`skills/neuro-humble/`](skills/neuro-humble/SKILL.md)
+> **Browse on ClawHub:** [clawhub.ai/sparrowpanton/neuro-humble](https://clawhub.ai/sparrowpanton/neuro-humble) | **Source:** [`skills/neuro-humble/`](skills/neuro-humble/SKILL.md)
 >
 > *Co-developed by Dr. Sparrow Panton, Claude (Anthropic), and Harold (GPT-OSS 120B).*
 
