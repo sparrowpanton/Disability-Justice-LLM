@@ -1,6 +1,6 @@
 # Training Neuro-Humble AI
 
-### A Disability Justice Approach to Fine-Tuning Language Models for Mental Health and Neurodiversity Contexts
+### A Disability Justice Approach to Fine-Tuning Language Models for Mental Health and Neurodiversity Contexts: Formation not Information 
 
 **PI:** Dr. Sparrow (Amy) Panton | Emmanuel College, University of Toronto
 **Status:** Active — Baseline + Practicum + Peer Supervision Complete (13 Models, 4 Tiers)
