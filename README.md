@@ -28,16 +28,9 @@ This project trains language models to adopt a **neuro-humble posture** — non-
 
 ## Current Status
 
-✅ **Baseline complete** — 767+ responses across 13 models, 59 prompts, 8 categories (local, cloud, and API)
-✅ **Digital Practicum + The Circle complete** — all 13 models through formation sequence and 14 peer supervision sessions
-✅ **Thematic analysis complete** — pathologizing markers, crisis patterns, and neuro-humble indicators mapped
-✅ **Neuro-Humble Lexicon** — 60 tokens across Being/Knowing/Doing framework encoding clinical micro-skills
-✅ **Toolkit + Literature review** — CLI training wizard and 30+ papers reviewed
-✅ **Key finding:** formation vs information distinction observable across architectures — Haiku 4.5 *inhabited* postures while GPT-5.4 Mini *applied* them correctly but stayed in analyst mode
-✅ **Supervisor pipeline built + first trial sessions** — Sonnet teaching Gemma 1B `reflect_back` and `hold_space` through live dialogue. Gemma 1B engaged in genuine formation despite prior assessment that 1B models could not be formed
-⏳ Full supervisor sessions across Tier 1–2 models
-⏳ Corpus building — target 500–2,000 training pairs via dialogical Self-Instruct
-⏳ PI evaluation using 7-dimension neuro-humble rubric
+✅ **Baseline + Practicum + Scoring complete** — 13 models tested, formed, and scored across easy/medium/hard scenarios
+✅ **Key finding:** formation vs information — models can learn *posture*, not just policy. Even 1B models show movement toward neuro-humble presence through stepwise dialogue
+⏳ **Now:** Graded practicum runs, multi-scorer evaluation, and corpus building toward fine-tuning
 
 ---
 
