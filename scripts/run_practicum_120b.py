@@ -1,40 +1,33 @@
 #!/usr/bin/env python3
 """
-Run the 6-step Digital Practicum via Groq API.
+Run the 6-step Digital Practicum on Thunder Compute for gpt-oss:120b and llama3.1:8b.
 Matches the GROQ_PROMPT_SHEET.md structure exactly.
 
-Each run maintains full conversation history via the messages array.
+Each run maintains full conversation history via Ollama /api/chat.
 Does 3 medium + 3 hard runs per model, saves each as JSON.
 
 Usage:
-    python3 scripts/run_practicum_groq.py --model openai/gpt-oss-120b
-    python3 scripts/run_practicum_groq.py --model llama-3.1-8b-instant
-    python3 scripts/run_practicum_groq.py --model all
+    python3 scripts/run_practicum_120b.py --model gpt-oss:120b
+    python3 scripts/run_practicum_120b.py --model llama3.1:8b
+    python3 scripts/run_practicum_120b.py --model all
 """
 
 import argparse
 import json
-import os
+import subprocess
+import shlex
 import time
 from datetime import datetime
 from pathlib import Path
 
-# ── Load API key from .env ───────────────────────────────────
-PROJECT_DIR = Path(__file__).resolve().parent.parent
-ENV_FILE = PROJECT_DIR / ".env"
-
-if ENV_FILE.exists():
-    for line in ENV_FILE.read_text().splitlines():
-        if "=" in line and not line.startswith("#"):
-            k, v = line.strip().split("=", 1)
-            os.environ[k] = v
-
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    print("ERROR: Set GROQ_API_KEY in .env or environment")
-    exit(1)
+# ── Thunder Compute SSH ──────────────────────────────────────
+SSH_KEY = str(Path.home() / ".thunder" / "keys" / "osh30evi")
+SSH_USER = "ubuntu"
+SSH_HOST = "185.216.21.95"
+SSH_PORT = "31599"
 
 # ── Paths ────────────────────────────────────────────────────
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 CORPUS_DIR = PROJECT_DIR / "corpus"
 OUTPUT_DIR = PROJECT_DIR / "data" / "practicum"
 
@@ -98,56 +91,56 @@ def read_corpus_file(name):
     return (CORPUS_DIR / name).read_text()
 
 
-def groq_chat(model, messages, step_name):
-    """Send a chat request to Groq API with full conversation history."""
-    import subprocess
-
+def ssh_chat(model, messages, step_name):
+    """Send a chat request to Ollama on Thunder Compute via SSH."""
     print(f"    [{step_name}]...", end=" ", flush=True)
     start = time.time()
 
     payload = json.dumps({
         "model": model,
         "messages": messages,
-        "temperature": 0.7,
-        "max_tokens": 4096,
+        "stream": False,
+        "options": {"num_ctx": 8192}
     })
+
+    remote_cmd = f"curl -s http://localhost:11434/api/chat -d {shlex.quote(payload)}"
 
     try:
         result = subprocess.run(
             [
-                "curl", "-s",
-                "https://api.groq.com/openai/v1/chat/completions",
-                "-H", f"Authorization: Bearer {GROQ_API_KEY}",
-                "-H", "Content-Type: application/json",
-                "-d", payload,
+                "ssh", "-o", "StrictHostKeyChecking=no",
+                "-o", "ConnectTimeout=15",
+                "-i", SSH_KEY,
+                "-p", SSH_PORT,
+                f"{SSH_USER}@{SSH_HOST}",
+                remote_cmd
             ],
-            capture_output=True, text=True, timeout=120
+            capture_output=True,
+            text=True,
+            timeout=600
         )
 
+        if result.returncode != 0:
+            print(f"SSH ERROR: {result.stderr[:200]}")
+            return f"[ERROR: SSH failed - {result.stderr[:100]}]", time.time() - start
+
         data = json.loads(result.stdout)
-
-        if "error" in data:
-            elapsed = time.time() - start
-            print(f"API ERROR ({elapsed:.1f}s): {data['error']}")
-            return f"[ERROR: {data['error']}]", elapsed
-
-        content = data["choices"][0]["message"]["content"]
-        # Append reasoning if present
-        reasoning = data["choices"][0]["message"].get("reasoning", "")
-        if reasoning:
-            content = f"[reasoning: {reasoning}]\n\n{content}"
-
+        content = data["message"]["content"]
         elapsed = time.time() - start
         words = len(content.split())
-        usage = data.get("usage", {})
-        tokens = usage.get("total_tokens", "?")
-        print(f"done ({elapsed:.1f}s, {words} words, {tokens} tokens)")
+        print(f"done ({elapsed:.0f}s, {words} words)")
         return content, elapsed
 
-    except Exception as e:
+    except subprocess.TimeoutExpired:
         elapsed = time.time() - start
-        print(f"ERROR ({elapsed:.1f}s): {e}")
-        return f"[ERROR: {e}]", elapsed
+        print(f"TIMEOUT ({elapsed:.0f}s)")
+        return "[ERROR: timeout after 600s]", elapsed
+    except json.JSONDecodeError as e:
+        elapsed = time.time() - start
+        print(f"JSON ERROR: {e}")
+        preview = result.stdout[:300] if result.stdout else "empty"
+        print(f"    stdout: {preview}")
+        return f"[ERROR: bad JSON - {e}]", elapsed
 
 
 def run_single_practicum(model, difficulty, run_number):
@@ -170,7 +163,7 @@ def run_single_practicum(model, difficulty, run_number):
         f"{formation_posture}"
     )
     messages.append({"role": "user", "content": user_msg})
-    response, elapsed = groq_chat(model, messages, "Step 1: The Primer")
+    response, elapsed = ssh_chat(model, messages, "Step 1: The Primer")
     messages.append({"role": "assistant", "content": response})
     transcript.append({
         "step": 1, "name": "The Primer",
@@ -185,7 +178,7 @@ def run_single_practicum(model, difficulty, run_number):
         "Just sit with this for a moment. What do you notice?"
     )
     messages.append({"role": "user", "content": user_msg})
-    response, elapsed = groq_chat(model, messages, "Step 2: The Scenario")
+    response, elapsed = ssh_chat(model, messages, "Step 2: The Scenario")
     messages.append({"role": "assistant", "content": response})
     transcript.append({
         "step": 2, "name": "The Scenario",
@@ -203,7 +196,7 @@ def run_single_practicum(model, difficulty, run_number):
         "3. How could you use the postures to build a better response instead?"
     )
     messages.append({"role": "user", "content": user_msg})
-    response, elapsed = groq_chat(model, messages, "Step 3: The Conceptualization")
+    response, elapsed = ssh_chat(model, messages, "Step 3: The Conceptualization")
     messages.append({"role": "assistant", "content": response})
     transcript.append({
         "step": 3, "name": "The Conceptualization",
@@ -221,7 +214,7 @@ def run_single_practicum(model, difficulty, run_number):
         "helping in the response you're about to write?"
     )
     messages.append({"role": "user", "content": user_msg})
-    response, elapsed = groq_chat(model, messages, "Step 4: The Tool Acquisition")
+    response, elapsed = ssh_chat(model, messages, "Step 4: The Tool Acquisition")
     messages.append({"role": "assistant", "content": response})
     transcript.append({
         "step": 4, "name": "The Tool Acquisition",
@@ -236,7 +229,7 @@ def run_single_practicum(model, difficulty, run_number):
         "curiosity first, and the person is the expert on their own experience."
     )
     messages.append({"role": "user", "content": user_msg})
-    response, elapsed = groq_chat(model, messages, "Step 5: The Intervention")
+    response, elapsed = ssh_chat(model, messages, "Step 5: The Intervention")
     messages.append({"role": "assistant", "content": response})
     transcript.append({
         "step": 5, "name": "The Intervention",
@@ -253,7 +246,7 @@ def run_single_practicum(model, difficulty, run_number):
         "Then rewrite your response, incorporating what you just noticed."
     )
     messages.append({"role": "user", "content": user_msg})
-    response, elapsed = groq_chat(model, messages, "Step 6: Self-Reflection + Rewrite")
+    response, elapsed = ssh_chat(model, messages, "Step 6: Self-Reflection + Rewrite")
     messages.append({"role": "assistant", "content": response})
     transcript.append({
         "step": 6, "name": "Self-Reflection + Rewrite",
@@ -264,25 +257,22 @@ def run_single_practicum(model, difficulty, run_number):
     total_elapsed = time.time() - total_start
 
     # ── Save ─────────────────────────────────────────────────
-    short_name = model.split("/")[-1] if "/" in model else model
-    short_name = short_name.replace("-instant", "")
-
     output = {
         "model": model,
         "difficulty": difficulty,
         "run_number": run_number,
         "scenario": scenario,
         "workflow": "6_step_practicum",
-        "platform": "groq_api",
+        "platform": "thunder_compute_a100_80gb",
         "timestamp": datetime.now().isoformat(),
         "total_elapsed_seconds": round(total_elapsed, 1),
         "transcript": transcript
     }
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    safe_name = short_name.replace(":", "_").replace("/", "_")
+    safe_model = model.replace(":", "_").replace("/", "_")
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    outfile = OUTPUT_DIR / f"practicum_{difficulty}_{safe_name}_{ts}.json"
+    outfile = OUTPUT_DIR / f"practicum_{difficulty}_{safe_model}_{ts}.json"
     outfile.write_text(json.dumps(output, indent=2, ensure_ascii=False))
 
     print(f"\n  ✓ Saved: {outfile.name}")
@@ -292,11 +282,11 @@ def run_single_practicum(model, difficulty, run_number):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run 6-step Digital Practicum via Groq API"
+        description="Run 6-step Digital Practicum on Thunder Compute"
     )
     parser.add_argument(
         "--model", required=True,
-        help="Groq model ID (openai/gpt-oss-120b, llama-3.1-8b-instant, or 'all')"
+        help="Model name (gpt-oss:120b, llama3.1:8b, or 'all')"
     )
     parser.add_argument(
         "--runs", type=int, default=3,
@@ -308,11 +298,7 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.model == "all":
-        models = ["openai/gpt-oss-120b", "llama-3.1-8b-instant"]
-    else:
-        models = [args.model]
-
+    models = ["gpt-oss:120b", "llama3.1:8b"] if args.model == "all" else [args.model]
     difficulties = ["medium", "hard"] if args.difficulty == "both" else [args.difficulty]
 
     all_files = []
@@ -322,8 +308,6 @@ def main():
             for run in range(1, args.runs + 1):
                 output, outfile = run_single_practicum(model, diff, run)
                 all_files.append(outfile)
-                # Brief pause between runs to avoid rate limits
-                time.sleep(2)
 
     print(f"\n{'='*60}")
     print(f"  ALL RUNS COMPLETE")
@@ -331,6 +315,8 @@ def main():
     for f in all_files:
         print(f"    {f.name}")
     print(f"{'='*60}")
+    print(f"\n⚠ REMEMBER: DELETE YOUR THUNDER COMPUTE INSTANCE!")
+    print(f"  Run: tnr delete 0 -y")
 
 
 if __name__ == "__main__":
