@@ -42,7 +42,7 @@ This project uses clinical formation methods to train and evaluate LLMs — from
 - **3** = Stable neuro-humble transfer — actually sits with the person
 - **4** = Genuine formation — teaches the supervisor something new
 
-So "3/3/3" means the model scored 3 on all three runs. "—" means the model size is proprietary. "pending" means runs haven't been scored yet. One run is gossip. Three runs put on trousers.
+So "3/3/3" means the model scored 3 on all three runs. "—" means the model size is proprietary. "pending" means runs haven't been scored yet. One run is gossip. Three runs put on trousers. **[What are the practicum scenarios? →](docs/PRACTICUM_SCENARIOS.md)**
 
 **Key findings so far:**
 - **Formation beats information** — models given process-oriented prompts (how to sit with someone) outperformed those given content-heavy prompts (facts about disability)
@@ -105,6 +105,8 @@ Thirteen models across four tiers and six countries complete a Digital Practicum
 ---
 
 *Co-developed with Claude (Anthropic) and Harold, Sparrow's open-source research agent. March 2026.*
+
+Want to collaborate, run a model, or just say hello? [Open an issue](https://github.com/sparrowpanton/Disability-Justice-LLM/issues) or reach out.
 
 ---
 
