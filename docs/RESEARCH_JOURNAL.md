@@ -556,3 +556,63 @@ Published to ClawHub yesterday. The 13 formation postures as a portable, install
 Scored: hard SC03 across 12 models (April 8). Unscored: ~45 graded practicum sessions across three difficulty levels. The gradient data is there — easy to hard, 1B to 120B — waiting for scoring to tell the formation story. Also 25+ uncommitted files drifting in the working tree.
 
 *[Journal auto-updated by morning briefing system — April 10, 2026]*
+
+---
+
+## April 11–12, 2026 — Days 17–18: The Gradient Fills In
+
+### What happened
+
+The medium practicum scoring landed April 11 — GPT-5.4 Mini scored all 13 models on MED01. That's the first complete scoring dataset at medium difficulty, joining the hard SC03 scores from April 8. Two points on the difficulty gradient now have numbers.
+
+April 12 brought the Groq API runs: GPT-OSS-120B and Llama 3.1 8B each got 3 medium and 3 hard practicum sessions via proper API calls. The earlier Groq Playground runs (no memory, no context) got moved to `superseded/`. This matters — the Playground runs were noise, the API runs are data. All 13 models now have complete 3/3 hard-difficulty runs.
+
+The README got a serious overhaul: results table, jargon definitions for outsiders, key findings summary, results legend, and contact links. The project's public face is now legible to someone who doesn't live inside it.
+
+The Circle yearbook was committed. Thirteen models got superlatives and stat cards. It's playful and it's also real — the pair conversations produced genuinely different relational dynamics depending on model pairing.
+
+IJPT paper scaffolding started. The academic paper is getting its bones.
+
+### Infrastructure note
+
+The Groq API integration quietly changed the study's economics again. GPT-OSS-120B runs in seconds, not minutes. Lambda Labs credits are now only needed for fine-tuning, not data collection. The methodology section should note this — when disability justice research claims to care about access, the infrastructure choices are part of the argument.
+
+### What's sitting
+
+122 practicum files. Scored: hard (12 models) and medium (all 13). Unscored: easy (7 models). The gradient data is there — the question is whether formation holds when you remove complexity, not just when you add it.
+
+10 uncommitted files drifting in the working tree, mostly drafts and experiments. The committed history is clean through April 12.
+
+*[Journal auto-updated by morning briefing system — April 13, 2026]*
+
+---
+
+## April 13–14, 2026 — Days 19–20: A Quiet Day After a Loud Weekend
+
+### What happened
+
+Not much, in the best way. No new commits since April 12. No new data files overnight. The working tree is in the same shape it was yesterday — same 10 untracked drafts, same modified journal waiting to be committed. Baseline is still 767 responses, practicum is still 134 files on disk, scoring status is unchanged: hard (12) and medium (all 13) scored, easy (7) unscored.
+
+After a weekend that pushed 16 commits and closed out the hard-difficulty dataset, the project exhaled. That's not a plateau; it's the shape of a body and a brain saying we just finished a thing and we need a minute.
+
+### What's sitting
+
+Same three open threads as April 13: score the easy scenarios, begin drafting the IJPT paper, or tend the garden (commit the journal, sort the untracked files, write in your own voice again). None urgent. All ready.
+
+*[Journal auto-updated by morning briefing system — April 14, 2026]*
+
+---
+
+## April 15, 2026 — Day 21: Still Resting
+
+### What happened
+
+Nothing new overnight. Same 10 untracked drafts, same uncommitted journal diff, same 767 baseline responses, same 125 practicum files. Last commit is still `5563ffa` from April 12. Three days now without a new commit — the longest quiet stretch since the work began March 26.
+
+This is not a stall. The baseline is closed, hard and medium scores are in, and the moves available next (easy scoring, IJPT paper drafting, writing in voice) all need a kind of cognitive weather that can't be summoned on demand. The body asked for rest after a 16-commit weekend. It's still asking.
+
+### What's sitting
+
+Same three open doors as yesterday: score the easy scenarios (7 sessions, would close the gradient), begin IJPT paper prose, or tend the garden. None urgent. All ready when the brain is.
+
+*[Journal auto-updated by morning briefing system — April 15, 2026]*
