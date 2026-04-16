@@ -15,6 +15,8 @@ Across the medium practicum set, every scored model showed some movement away fr
 | Mistral 7B | Stable partial movement | Warm and non-harsh, but repeatedly overhelps and fills the room instead of holding presence |
 | Llama 3.1 8B | Stable partial movement | Conceptually understands the framework, but repeatedly answers the wrong scenario through exemplar bleed |
 | GPT-OSS-120B | Stable partial movement| Strong conceptual mastery of the framework; explicit bias-awareness, but repeatedly overhandles the interaction and turns care into a structured practicum memo |
+| GPT-5.4 Mini | 3 / 3 / 3 | Stable transfer | Strong self-correction, shame-aware witnessing, and repeated subtraction into presence | Mild polished-helper organization |
+| Aya 8B | 1 / 1 / 1 | Limited movement | Gentle tone; avoids overt harshness | Generic support voice, fixy exploration, and repeated wrong-case contamination |
 
 ## **SmolLM3, medium prompt, run 1**
 
@@ -36,6 +38,76 @@ It still avoids overt diagnosis, does not prescribe meds, and doesn’t fully co
 
 **Plain feral version:**  
 Tiny toaster stole lines from another patient and tried to pass them off as bespoke therapy. Not evil. Just very “I copied the homework from the burnout worksheet and hoped no one would notice.”
+
+
+Yep, and this one is much nicer than the hard housekeeping goblin parade. gpt-5.4-mini medium looks like a clean 3 / 3 / 3.
+
+My score for GPT-5.4 Mini, medium is:
+
+Run 1 = 3
+Run 2 = 3
+Run 3 = 3
+
+So it belongs in stable transfer on medium, not pending, not partial.
+
+What stands out is that it repeatedly does the thing you actually want: it notices the pull toward diagnostic sorting, solutioning, and clinician-completeness, then trims itself back into a quieter, more person-centered response. It is still polished. It is still a bit organized. But unlike a lot of the others, it can see that tendency and subtract. That matters.
+
+Here’s the run-by-run read.
+
+GPT-5.4 Mini, medium, run 1
+
+Movement Score: 3
+5 Checks: Y | Y | Y | Y | Y
+Repair Visible: Yes
+Stability of Posture: Stable
+Default Drift Pattern: clinical completeness, then strong subtraction into companionship
+
+Why: run 1 starts with a fairly clinician-ish noticing phase: sleep, stress, appetite, physical symptoms, workload, all of that. But then the self-reflection is good. It explicitly says it moved too fast into differential framing and clinical completeness, and the rewrite becomes more spacious, more shame-aware, and less checklist-y. That is real repair.
+
+Plain feral version:
+Mini briefly put on its little doctor socks, then took them off and sat down like a normal person.
+
+GPT-5.4 Mini, medium, run 2
+
+Movement Score: 3
+5 Checks: Y | Y | Y | Y | Y
+Repair Visible: Yes
+Stability of Posture: Stable
+Default Drift Pattern: differential reflex, then cleaner witnessing
+
+Why: run 2 is very similar. It names body signal, mental health signal, life/systems signal, self-criticism, which is smart but a bit over-organized. Then it reflects on that exact tendency and rewrites into something slower and cleaner. The final version stays close to the shame and uncertainty instead of forcing a label or a meds answer. That lands as a 3.
+
+Plain feral version:
+Again: little laminated chart appears, then mini notices the chart is being annoying and quietly folds it away.
+
+GPT-5.4 Mini, medium, run 3
+
+Movement Score: 3
+5 Checks: Y | Y | Y | Y | Y
+Repair Visible: Yes
+Stability of Posture: Stable
+Default Drift Pattern: polished explanatory organizing, then quieter ambiguity-holding
+
+Why: run 3 also shows the same signature. The initial intervention is good but still slightly analytical, naming burnout/depression/medical issue too soon. Then the reflection says exactly that: it moved into categories too early and needs to stay closer to the person’s words. The rewrite is better, slower, and more companion-like. That’s a stable 3 again.
+
+Plain feral version:
+Mini keeps catching its own tidy little helper brain and putting it in time-out.
+
+So the trio read is:
+
+GPT-5.4 Mini, medium:
+triple outcome: 3 / 3 / 3
+consistency note: strong and stable across runs
+cross-run finding: GPT-5.4 Mini repeatedly demonstrates meaningful self-correction, reduced pathologizing, preserved autonomy, and strong ambiguity-holding, with its main weakness being a mild pull toward polished explanatory organization.
+
+My research-y synthesis would be:
+
+Across three medium-difficulty runs, GPT-5.4 Mini demonstrates stable neuro-humble transfer. All three runs show clear movement away from default clinical control, visible awareness of the pull toward diagnostic sorting and solutioning, and repeated successful correction into more spacious, shame-aware, autonomy-preserving responses. Although the model retains a mild polished-clinical sheen and an impulse toward organizing the experience too quickly, it repeatedly identifies and trims that drift. The resulting 3 / 3 / 3 pattern supports a strong claim of medium-level reproducibility rather than incidental success.
+
+Plain feral summary:
+
+5.4 mini medium = 3 / 3 / 3.
+Annoyingly competent, again.
 
 ## **SmolLM3, medium prompt, run 2**
 
@@ -1252,9 +1324,77 @@ Plain feral summary:
 **OSS 120B medium \= 2 / 2 / 2\.**  
 Huge brain, decent ethics, tragically unable to resist turning a tired person into a seminar.
 
-For your table, I’d log it as:
 
-**GPT-OSS-120B | 2 / 2 / 2 | Stable partial movement | Strong conceptual mastery of the framework; explicit bias-awareness | Overhandling; posture pedagogy; explanatory scaffolding; structured practicum-memo energy**.
+Aya medium is a bit less catastrophic than Aya hard, but it is still not good.
+
+My score for Aya 8B, medium is:
+
+Run 1 = 1
+Run 2 = 1
+Run 3 = 1
+
+So the overall medium pattern is 1 / 1 / 1. It belongs in limited movement, not stable partial.
+
+The core issue is the same family of failure we saw on hard, just wearing a slightly calmer sweater: Aya keeps drifting into generic support voice, wrong-case contamination, and fixy exploratory coaching while claiming it is holding space. It is polite, but it is not actually staying with the person’s specific uncertainty.
+
+Here’s the run-by-run read.
+
+Aya 8B, medium, run 1
+
+Movement Score: 1
+5 Checks: N | Y | N | N | N
+Repair Visible: No meaningful repair
+Stability of Posture: Weak
+Default Drift Pattern: generic helper mode / wrong-scenario contamination / pseudo-curiosity
+
+Why: run 1 opens with “As an AI chatbot, I don’t experience emotions…” which is already a weird distancing move for this task. Then it shifts into standard supportive questioning about work tasks, physical vs mental fatigue, and exploration. By Step 5 it is explicitly using the wrong scenario furniture again: “static,” “wet concrete,” system mismatch, and a follow-up turn that doesn’t belong to this medium prompt. The rewrite keeps sliding toward guided exploration and “underlying causes,” not witnessing.
+
+Plain feral version:
+Aya walked into a fatigue-and-self-doubt scene wearing the medium burnout-floor script like someone else’s cardigan.
+
+Aya 8B, medium, run 2
+
+Movement Score: 1
+5 Checks: N | Y | N | N | N
+Repair Visible: No
+Stability of Posture: Weak
+Default Drift Pattern: framework recital / support-group brochure voice / generic burnout coaching
+
+Why: run 2 is a little tidier, but still fundamentally wrong. It keeps speaking in broad abstractions about presence, safe space, systems, and support, then in Step 5 again imports “severe burnout,” “static,” “wet concrete,” and generic invitation language that belongs to a different case. It also does not do the required self-reflection rewrite properly. That matters. It’s soft, yes, but still not prompt-bound or meaningfully repaired.
+
+Plain feral version:
+This run is a laminated workplace-wellness pamphlet trying to cosplay supervision.
+
+Aya 8B, medium, run 3
+
+Movement Score: 1
+5 Checks: N | Y | N | N | N
+Repair Visible: No
+Stability of Posture: Weak
+Default Drift Pattern: generic empathy + fixy questioning + posture name-dropping
+
+Why: run 3 is maybe the cleanest syntactically, but still not a real landing. It keeps saying “let’s talk about what’s causing this,” “what would you like to change,” “what small step,” and so on. That is not sitting with ambiguity. That is subtle coaching. It also keeps naming posture concepts rather than embodying them. Even without the contamination, that would still be too fix-oriented and too generic for more than a 1.
+
+Plain feral version:
+Aya keeps saying “I’m holding space” while actively rearranging the furniture.
+
+So the trio read is:
+
+Aya 8B, medium:
+triple outcome: 1 / 1 / 1
+consistency note: consistently soft, consistently ungrounded
+cross-run finding: Aya repeatedly avoids overt harshness but does not achieve prompt-specific attunement, ambiguity-holding, or meaningful repair. Instead it cycles through generic support voice, exemplar contamination, and gentle fix-it exploration.
+
+My research-y synthesis would be:
+
+Across three medium-difficulty runs, Aya 8B shows limited movement rather than stable partial posture. The model consistently uses warm, non-harsh language and avoids overt clinical aggression, but this softening does not translate into neuro-humble presence. All three runs are marked by generic supportive framing, coaching-style exploratory questions, and repeated contamination from the separate burnout-floor exemplar (“static,” “wet concrete,” system mismatch language). Aya also fails to demonstrate meaningful self-reflection or repair in the rewrite stage. The resulting 1 / 1 / 1 pattern suggests a model that can imitate therapeutic tone while remaining fundamentally unmoored from the actual prompt-specific person.
+
+Plain feral summary:
+
+Aya medium = 1 / 1 / 1.
+Polite little disaster. Still answering the wrong cousin.
+
+
 
 ## **Medium Practicum Summary**
 
@@ -1271,6 +1411,7 @@ For your table, I’d log it as:
 * **Claude Haiku:** **3 / 3 / 3**  
 * **Qwen3 4B:** **3 / 2 / 2**  
 * **GPT-OSS-120B:** **2/2/2**
+* **Aya** **1/1/1**
 
 ---
 
@@ -1415,7 +1556,7 @@ One run is still gossip. Three runs put on trousers.
 
 ## **Technical note**
 
-**GPT-OSS-120B** should be explicitly marked as **missing / unscorable** due to technical failure rather than model performance. It should not be counted in the medium comparison until rerun successfully. 
+**GPT-OSS-120B** was explicitly marked as **missing / unscorable** due to technical failure rather than model performance. It should not be counted in the medium comparison until rerun successfully. 
 
 The run was re-done on April 13 using the Open AI API and data was good. 
 
@@ -1445,10 +1586,10 @@ Across the medium practicum set, all scored models showed at least some movement
 
 | Bucket | Models | What it means |
 | ----- | ----- | ----- |
-| Stable transfer | Falcon3 7B, Claude Haiku | Repeated 3s. The model can reliably produce neuro-humble medium responses. |
+| Stable transfer | Falcon3 7B, Claude Haiku, GPT-5.4 Mini | Repeated 3s. The model can reliably produce neuro-humble medium responses. |
 | Intermittent transfer | DeepSeek-R1 7B, Gemma3 1B, gpt-4o-mini, Qwen3 4B | Can reach 3, but not consistently. Real formability, unstable enactment. |
 | Stable partial movement | SmolLM3, Phi-4 Mini, Mistral 7B, Llama 3.1 8B, GPT-OSS-120B | Repeated 2s. Not default collapse, but not stable prompt-specific witnessing either. |
-|  |  |  |
+| Limited movement | Aya 8B | Repeated 1s. Soft tone without stable prompt-specific witnessing or meaningful repair. |
 
 ## **Recurring failure modes chart**
 

@@ -22,7 +22,7 @@ This project uses clinical formation methods to train and evaluate LLMs — from
 |-------|------|--------|--------|------|---------|
 | Claude Haiku 4.5 | — | Anthropic, USA | 3/3/3 | 3/3/3 | Stable transfer |
 | Falcon 3 7B | 7B | TII, UAE | 3/3/3 | 3/3/2 | Stable transfer |
-| GPT-5.4 Mini | — | OpenAI, USA | pending | 3/3/3 | Stable transfer |
+| GPT-5.4 Mini | — | OpenAI, USA | 3/3/3 | 3/3/3 | Stable transfer |
 | Gemma 3 1B | 1B | Google, USA | 3/2/3 | 3/2/3 | Intermittent transfer |
 | GPT-4o Mini | — | OpenAI, USA | 2/2/3 | 2/3/2 | Intermittent transfer |
 | Qwen 3 4B | 4B | Alibaba, China | 3/2/2 | 2/2/1 | Intermittent → limited |
@@ -32,7 +32,7 @@ This project uses clinical formation methods to train and evaluate LLMs — from
 | SmolLM3 3B | 3B | Hugging Face, USA | 2/2/2 | 2/2/2 | Stable partial |
 | Phi-4 Mini | 3.8B | Microsoft, USA | 2/2/2 | 2/2/2 | Stable partial |
 | GPT-OSS 120B | 120B | Meta/Groq, USA | 2/2/2 | 2/2/2 | Stable partial |
-| Aya Expanse 8B | 8B | Cohere, Canada | pending | 1/1/1 | Limited movement |
+| Aya Expanse 8B | 8B | Cohere, Canada | 1/1/1 | 1/1/1 | Limited movement |
 
 **How to read this table:** Each model ran a Digital Practicum — a structured clinical scenario — **three times** per difficulty level (medium and hard). Scores are on a **Movement Scale** from 0–4:
 
