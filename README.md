@@ -99,7 +99,7 @@ Thirteen models across four tiers and six countries complete a Digital Practicum
 - Designed and ran a Digital Practicum evaluation framework across 13 LLMs
 - Created the Neuro-Humble Lexicon — 60 clinical micro-skill tokens mapped to Being/Knowing/Doing
 - Authored all training corpus texts (no copyrighted third-party material)
-- Built and deployed a portable formation skill for AI agents (ClawHub)
+- Built and deployed a portable formation skill for AI agents — available on ClawHub for OpenClaw and Hermes (Nous Research) agents
 - Set up open-source model infrastructure on Groq, Ollama, and cloud GPU
 - Ran 14 peer supervision sessions (The Circle) — models reading and evaluating each other
 
@@ -113,9 +113,14 @@ Want to collaborate, run a model, or just say hello? [Open an issue](https://git
 
 ## Install the Neuro-Humble Skill
 
-**For AI agents:** [`/skill install neuro-humble`](skills/neuro-humble/SKILL.md) | [Browse on ClawHub](https://clawhub.ai/sparrowpanton/neuro-humble)
-
 A portable formation skill that teaches any AI agent to hold a neuro-humble posture — 13 formation postures, 7 clinical micro-skill tokens, and the Yatsar (both/and) principle. Works at the prompt level through any harness.
+
+| Harness | Install command |
+|---------|----------------|
+| **OpenClaw** | `/skill install neuro-humble` |
+| **Hermes** (Nous Research) | `hermes skills install neuro-humble` |
+
+[Browse on ClawHub →](https://clawhub.ai/sparrowpanton/neuro-humble) · [Skill source](skills/neuro-humble/SKILL.md)
 
 ---
 
