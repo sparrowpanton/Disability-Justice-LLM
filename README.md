@@ -12,7 +12,7 @@
 
 This project uses clinical formation methods to train and evaluate LLMs — from 1B open-source to proprietary — to hold a **neuro-humble** posture with neurodivergent and disabled people. Neuro-humble means: don't diagnose, don't fix, don't flatten. Sit with the person. 13 models, 6 countries, 4 tiers.
 
-> 🧹 **Please excuse the mess** — this is a new project and we're still getting things organized. Questions? **sparrowpanton@gmail.com** · [LinkedIn](https://www.linkedin.com/in/sparrow-panton)
+> 🧹 **Please excuse the mess** — this is a new project and we're still getting things organized. Questions? **sparrowpanton@gmail.com** · [LinkedIn](https://www.linkedin.com/in/sparrow-panton) · [Featured on Handshake AI Hub](https://app.joinhandshake.com/ai-showcase?project_id=3062059)
 
 ---
 
