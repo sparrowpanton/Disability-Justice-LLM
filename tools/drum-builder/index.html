@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a1a2e">
+<link rel="manifest" href="manifest.json">
+<title>Drum Builder</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; }
+
+:root {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --border: #0f3460;
+  --text: #e8e8e8;
+  --accent: #e94560;
+  --beat-bg: #1a1a3e;
+  --and-bg: #12122a;
+  --highlight: #e9456044;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  touch-action: pan-y;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.controls button {
+  background: var(--border);
+  border: none;
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.controls button:active, .controls button.active {
+  background: var(--accent);
+}
+
+.controls button:disabled {
+  opacity: 0.4;
+}
+
+.bpm-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.bpm-control input {
+  width: 48px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Timeline */
+.timeline-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 16px 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeline {
+  display: flex;
+  gap: 2px;
+  min-height: 200px;
+  padding-bottom: 20px;
+}
+
+.beat-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+  flex-shrink: 0;
+}
+
+.beat-column.six-col {
+  min-width: 48px;
+}
+
+.beat-label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #aaa;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.beat-label.downbeat {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.beat-slot {
+  width: 52px;
+  min-height: 160px;
+  background: var(--beat-bg);
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px 2px;
+  gap: 3px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.beat-slot.and-slot {
+  background: var(--and-bg);
+}
+
+.beat-slot.six-slot {
+  background: #0e0e22;
+  border-style: dotted;
+  width: 44px;
+}
+
+.beat-label.six-label {
+  font-size: 11px;
+  color: #555;
+}
+
+.beat-slot.drag-over {
+  border-color: var(--accent);
+  background: var(--highlight);
+}
+
+.beat-slot.playing {
+  border-color: var(--accent);
+  background: var(--highlight);
+  box-shadow: 0 0 20px var(--highlight);
+}
+
+/* Drum pieces in slots */
+.placed-piece {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s;
+  flex-shrink: 0;
+}
+
+.placed-piece:active {
+  transform: scale(0.9);
+}
+
+.placed-piece svg {
+  width: 38px;
+  height: 38px;
+}
+
+.remove-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  font-size: 12px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.placed-piece.removing .remove-badge {
+  display: flex;
+}
+
+/* Palette */
+.palette {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 12px 8px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  flex-shrink: 0;
+}
+
+.palette-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+.palette-items {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.palette-piece {
+  width: 64px;
+  height: 72px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: grab;
+  flex-shrink: 0;
+  transition: border-color 0.15s, transform 0.1s;
+  touch-action: none;
+}
+
+.palette-piece:active {
+  border-color: var(--accent);
+  transform: scale(0.95);
+}
+
+.palette-piece svg {
+  width: 40px;
+  height: 40px;
+}
+
+.palette-piece .piece-name {
+  font-size: 9px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Drag ghost */
+.drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.85;
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+
+.drag-ghost svg {
+  width: 56px;
+  height: 56px;
+}
+
+/* Clear bar button */
+.clear-btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #888;
+  cursor: pointer;
+}
+
+.clear-btn:active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🥁 Drum Builder</h1>
+  <div class="controls">
+    <div class="bpm-control">
+      <input type="number" id="bpmInput" value="80" min="40" max="200" step="5">
+      <span>bpm</span>
+    </div>
+    <button id="playBtn" title="Play">▶</button>
+    <button class="clear-btn" id="clearBtn">Clear</button>
+  </div>
+</header>
+
+<div class="timeline-container" id="timelineContainer">
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<div class="palette">
+  <div class="palette-label">Drag to timeline</div>
+  <div class="palette-items" id="palette"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Drum pieces with SVG icons ──
+const DRUMS = [
+  {
+    id: 'crash',
+    name: 'Crash',
+    color: '#f0c030',
+    y: 0,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="28" rx="32" ry="10" fill="#dab020" stroke="#f0c030" stroke-width="2.5"/><line x1="40" y1="38" x2="40" y2="72" stroke="#888" stroke-width="3"/><line x1="32" y1="72" x2="48" y2="72" stroke="#777" stroke-width="3"/><line x1="20" y1="22" x2="14" y2="16" stroke="#f0c030" stroke-width="1.5" opacity="0.6"/><line x1="60" y1="22" x2="66" y2="16" stroke="#f0c030" stroke-width="1.5" opacity="0.6"/><line x1="40" y1="18" x2="40" y2="12" stroke="#f0c030" stroke-width="1.5" opacity="0.6"/></svg>`
+  },
+  {
+    id: 'ride',
+    name: 'Ride',
+    color: '#c9960c',
+    y: 1,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="30" rx="34" ry="12" fill="#b08808" stroke="#c9960c" stroke-width="2.5"/><circle cx="40" cy="30" r="5" fill="#dab020" opacity="0.6"/><line x1="40" y1="42" x2="40" y2="72" stroke="#888" stroke-width="3"/><line x1="32" y1="72" x2="48" y2="72" stroke="#777" stroke-width="3"/></svg>`
+  },
+  {
+    id: 'hihat',
+    name: 'Hi-Hat',
+    color: '#d4a017',
+    y: 2,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="30" rx="28" ry="8" fill="#c8a000" stroke="#d4a017" stroke-width="2.5"/><ellipse cx="40" cy="36" rx="28" ry="8" fill="#b89000" stroke="#c49515" stroke-width="2.5"/><line x1="40" y1="44" x2="40" y2="72" stroke="#888" stroke-width="3"/><ellipse cx="40" cy="72" rx="14" ry="4" fill="none" stroke="#777" stroke-width="2"/></svg>`
+  },
+  {
+    id: 'hihat-open',
+    name: 'Open HH',
+    color: '#e6b422',
+    y: 2,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="26" rx="28" ry="8" fill="#d4a017" stroke="#e6b422" stroke-width="2.5"/><ellipse cx="40" cy="40" rx="28" ry="8" fill="#c49515" stroke="#d4a017" stroke-width="2.5"/><line x1="40" y1="48" x2="40" y2="72" stroke="#888" stroke-width="3"/><ellipse cx="40" cy="72" rx="14" ry="4" fill="none" stroke="#777" stroke-width="2"/><text x="68" y="24" fill="#e6b422" font-size="16" font-weight="bold">○</text></svg>`
+  },
+  {
+    id: 'tom-hi',
+    name: 'Hi Tom',
+    color: '#6a4e3a',
+    y: 3,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="30" rx="22" ry="12" fill="#d4c4b0" stroke="#8b7355" stroke-width="3"/><path d="M18,30 L18,52 Q40,66 62,52 L62,30" fill="#6a4e3a" stroke="#8b7355" stroke-width="3"/></svg>`
+  },
+  {
+    id: 'tom-lo',
+    name: 'Lo Tom',
+    color: '#5a3e2a',
+    y: 4,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="26" rx="28" ry="14" fill="#c4b4a0" stroke="#7a6345" stroke-width="3"/><path d="M12,26 L12,54 Q40,72 68,54 L68,26" fill="#5a3e2a" stroke="#7a6345" stroke-width="3"/></svg>`
+  },
+  {
+    id: 'snare',
+    name: 'Snare',
+    color: '#999999',
+    y: 5,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="36" rx="30" ry="18" fill="#ddd" stroke="#aaa" stroke-width="3"/><path d="M10,36 L10,50 Q40,68 70,50 L70,36" fill="#bbb" stroke="#999" stroke-width="3"/><line x1="14" y1="38" x2="14" y2="50" stroke="#888" stroke-width="1.5" opacity="0.6"/><line x1="66" y1="38" x2="66" y2="50" stroke="#888" stroke-width="1.5" opacity="0.6"/><line x1="18" y1="32" x2="62" y2="32" stroke="#999" stroke-width="1" opacity="0.5"/><line x1="16" y1="36" x2="64" y2="36" stroke="#999" stroke-width="1" opacity="0.5"/></svg>`
+  },
+  {
+    id: 'floor-tom',
+    name: 'Floor',
+    color: '#4a2e1a',
+    y: 6,
+    svg: `<svg viewBox="0 0 80 80"><ellipse cx="40" cy="22" rx="30" ry="14" fill="#b4a490" stroke="#6a5335" stroke-width="3"/><path d="M10,22 L10,56 Q40,74 70,56 L70,22" fill="#4a2e1a" stroke="#6a5335" stroke-width="3"/><line x1="12" y1="56" x2="8" y2="72" stroke="#888" stroke-width="2.5"/><line x1="68" y1="56" x2="72" y2="72" stroke="#888" stroke-width="2.5"/></svg>`
+  },
+  {
+    id: 'kick-r',
+    name: 'Kick R',
+    color: '#555555',
+    y: 7,
+    svg: `<svg viewBox="0 0 80 80"><circle cx="40" cy="38" r="30" fill="#2a2a2a" stroke="#666" stroke-width="4"/><circle cx="40" cy="38" r="18" fill="#333" stroke="#555" stroke-width="2"/><text x="40" y="44" text-anchor="middle" fill="#aaa" font-size="16" font-weight="bold">R</text></svg>`
+  },
+  {
+    id: 'kick-l',
+    name: 'Kick L',
+    color: '#444444',
+    y: 8,
+    svg: `<svg viewBox="0 0 80 80"><circle cx="40" cy="38" r="30" fill="#222" stroke="#555" stroke-width="4"/><circle cx="40" cy="38" r="18" fill="#2a2a2a" stroke="#444" stroke-width="2"/><text x="40" y="44" text-anchor="middle" fill="#888" font-size="16" font-weight="bold">L</text></svg>`
+  }
+];
+
+const BEATS = [
+  { label: '1', type: 'down' },
+  { label: 'e', type: 'six' },
+  { label: '&', type: 'and' },
+  { label: 'a', type: 'six' },
+  { label: '2', type: 'down' },
+  { label: 'e', type: 'six' },
+  { label: '&', type: 'and' },
+  { label: 'a', type: 'six' },
+  { label: '3', type: 'down' },
+  { label: 'e', type: 'six' },
+  { label: '&', type: 'and' },
+  { label: 'a', type: 'six' },
+  { label: '4', type: 'down' },
+  { label: 'e', type: 'six' },
+  { label: '&', type: 'and' },
+  { label: 'a', type: 'six' },
+];
+
+// ── State ──
+let pattern = BEATS.map(() => []); // array of arrays of drum IDs
+let isPlaying = false;
+let playInterval = null;
+let currentBeat = -1;
+
+// ── Build palette ──
+const paletteEl = document.getElementById('palette');
+DRUMS.forEach(drum => {
+  const el = document.createElement('div');
+  el.className = 'palette-piece';
+  el.dataset.drumId = drum.id;
+  el.innerHTML = drum.svg + `<span class="piece-name">${drum.name}</span>`;
+  el.addEventListener('touchstart', onPaletteTouchStart, { passive: false });
+  el.addEventListener('mousedown', onPaletteMouseDown);
+  paletteEl.appendChild(el);
+});
+
+// ── Build timeline ──
+function renderTimeline() {
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = '';
+  pattern.forEach((pieces, i) => {
+    const bt = BEATS[i].type;
+    const col = document.createElement('div');
+    col.className = 'beat-column' + (bt === 'six' ? ' six-col' : '');
+    col.dataset.beatIndex = i;
+
+    const label = document.createElement('div');
+    label.className = 'beat-label' + (bt === 'down' ? ' downbeat' : '') + (bt === 'six' ? ' six-label' : '');
+    label.textContent = BEATS[i].label;
+    col.appendChild(label);
+
+    const slot = document.createElement('div');
+    slot.className = 'beat-slot' + (bt === 'and' ? ' and-slot' : '') + (bt === 'six' ? ' six-slot' : '');
+    slot.dataset.beatIndex = i;
+    if (i === currentBeat && isPlaying) slot.classList.add('playing');
+
+    const sorted = [...pieces].sort((a, b) => {
+      const da = DRUMS.find(d => d.id === a);
+      const db = DRUMS.find(d => d.id === b);
+      return (da?.y ?? 99) - (db?.y ?? 99);
+    });
+    sorted.forEach((drumId) => {
+      const pieceIdx = pieces.indexOf(drumId);
+      const drum = DRUMS.find(d => d.id === drumId);
+      if (!drum) return;
+      const piece = document.createElement('div');
+      piece.className = 'placed-piece';
+      piece.dataset.beatIndex = i;
+      piece.dataset.pieceIndex = pieceIdx;
+      piece.innerHTML = drum.svg + `<div class="remove-badge">×</div>`;
+      piece.addEventListener('click', () => removePiece(i, pieceIdx));
+      piece.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        removePiece(i, pieceIdx);
+      }, { passive: false });
+      slot.appendChild(piece);
+    });
+
+    col.appendChild(slot);
+    tl.appendChild(col);
+  });
+}
+
+function removePiece(beatIndex, pieceIndex) {
+  pattern[beatIndex].splice(pieceIndex, 1);
+  renderTimeline();
+  savePattern();
+  showToast('Removed');
+}
+
+// ── Drag and drop (touch) ──
+let dragGhost = null;
+let dragDrumId = null;
+
+function onPaletteTouchStart(e) {
+  e.preventDefault();
+  const el = e.currentTarget;
+  dragDrumId = el.dataset.drumId;
+  const drum = DRUMS.find(d => d.id === dragDrumId);
+  const touch = e.touches[0];
+
+  dragGhost = document.createElement('div');
+  dragGhost.className = 'drag-ghost';
+  dragGhost.innerHTML = drum.svg;
+  dragGhost.style.left = touch.clientX + 'px';
+  dragGhost.style.top = touch.clientY + 'px';
+  document.body.appendChild(dragGhost);
+
+  document.addEventListener('touchmove', onDragTouchMove, { passive: false });
+  document.addEventListener('touchend', onDragTouchEnd);
+}
+
+function onDragTouchMove(e) {
+  e.preventDefault();
+  const touch = e.touches[0];
+  if (dragGhost) {
+    dragGhost.style.left = touch.clientX + 'px';
+    dragGhost.style.top = touch.clientY + 'px';
+  }
+
+  // Highlight slot under finger
+  document.querySelectorAll('.beat-slot').forEach(s => s.classList.remove('drag-over'));
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const slot = el?.closest?.('.beat-slot');
+  if (slot) slot.classList.add('drag-over');
+}
+
+function onDragTouchEnd(e) {
+  document.removeEventListener('touchmove', onDragTouchMove);
+  document.removeEventListener('touchend', onDragTouchEnd);
+
+  const touch = e.changedTouches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const slot = el?.closest?.('.beat-slot');
+
+  if (slot && dragDrumId) {
+    const beatIdx = parseInt(slot.dataset.beatIndex);
+    if (!pattern[beatIdx].includes(dragDrumId)) {
+      pattern[beatIdx].push(dragDrumId);
+      renderTimeline();
+      savePattern();
+    } else {
+      showToast('Already there!');
+    }
+  }
+
+  document.querySelectorAll('.beat-slot').forEach(s => s.classList.remove('drag-over'));
+  if (dragGhost) { dragGhost.remove(); dragGhost = null; }
+  dragDrumId = null;
+}
+
+// ── Drag and drop (mouse, for desktop) ──
+function onPaletteMouseDown(e) {
+  e.preventDefault();
+  const el = e.currentTarget;
+  dragDrumId = el.dataset.drumId;
+  const drum = DRUMS.find(d => d.id === dragDrumId);
+
+  dragGhost = document.createElement('div');
+  dragGhost.className = 'drag-ghost';
+  dragGhost.innerHTML = drum.svg;
+  dragGhost.style.left = e.clientX + 'px';
+  dragGhost.style.top = e.clientY + 'px';
+  document.body.appendChild(dragGhost);
+
+  document.addEventListener('mousemove', onDragMouseMove);
+  document.addEventListener('mouseup', onDragMouseUp);
+}
+
+function onDragMouseMove(e) {
+  if (dragGhost) {
+    dragGhost.style.left = e.clientX + 'px';
+    dragGhost.style.top = e.clientY + 'px';
+  }
+  document.querySelectorAll('.beat-slot').forEach(s => s.classList.remove('drag-over'));
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const slot = el?.closest?.('.beat-slot');
+  if (slot) slot.classList.add('drag-over');
+}
+
+function onDragMouseUp(e) {
+  document.removeEventListener('mousemove', onDragMouseMove);
+  document.removeEventListener('mouseup', onDragMouseUp);
+
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const slot = el?.closest?.('.beat-slot');
+
+  if (slot && dragDrumId) {
+    const beatIdx = parseInt(slot.dataset.beatIndex);
+    if (!pattern[beatIdx].includes(dragDrumId)) {
+      pattern[beatIdx].push(dragDrumId);
+      renderTimeline();
+      savePattern();
+    } else {
+      showToast('Already there!');
+    }
+  }
+
+  document.querySelectorAll('.beat-slot').forEach(s => s.classList.remove('drag-over'));
+  if (dragGhost) { dragGhost.remove(); dragGhost = null; }
+  dragDrumId = null;
+}
+
+// ── Playback ──
+const playBtn = document.getElementById('playBtn');
+const bpmInput = document.getElementById('bpmInput');
+
+playBtn.addEventListener('click', togglePlay);
+
+function togglePlay() {
+  if (isPlaying) {
+    stopPlay();
+  } else {
+    startPlay();
+  }
+}
+
+function startPlay() {
+  isPlaying = true;
+  playBtn.textContent = '⏸';
+  playBtn.classList.add('active');
+  currentBeat = -1;
+  tick();
+}
+
+function stopPlay() {
+  isPlaying = false;
+  playBtn.textContent = '▶';
+  playBtn.classList.remove('active');
+  currentBeat = -1;
+  clearTimeout(playInterval);
+  renderTimeline();
+}
+
+function tick() {
+  if (!isPlaying) return;
+  currentBeat = (currentBeat + 1) % BEATS.length;
+  renderTimeline();
+
+  // Scroll current beat into view
+  const col = document.querySelector(`[data-beat-index="${currentBeat}"].beat-column`);
+  if (col) col.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+  const bpm = parseInt(bpmInput.value) || 80;
+  const msPerSixteenth = (60000 / bpm) / 4;
+  playInterval = setTimeout(tick, msPerSixteenth);
+}
+
+// ── Clear ──
+document.getElementById('clearBtn').addEventListener('click', () => {
+  if (pattern.every(b => b.length === 0)) return;
+  pattern = BEATS.map(() => []);
+  renderTimeline();
+  savePattern();
+  showToast('Cleared');
+});
+
+// ── Persistence ──
+function savePattern() {
+  try {
+    localStorage.setItem('drum-pattern', JSON.stringify(pattern));
+    localStorage.setItem('drum-bpm', bpmInput.value);
+  } catch(e) {}
+}
+
+function loadPattern() {
+  try {
+    const saved = localStorage.getItem('drum-pattern');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length === BEATS.length) {
+        pattern = parsed;
+      }
+    }
+    const savedBpm = localStorage.getItem('drum-bpm');
+    if (savedBpm) bpmInput.value = savedBpm;
+  } catch(e) {}
+}
+
+bpmInput.addEventListener('change', savePattern);
+
+// ── Toast ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1200);
+}
+
+// ── Init ──
+loadPattern();
+renderTimeline();
+
+// ── Service Worker registration ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
