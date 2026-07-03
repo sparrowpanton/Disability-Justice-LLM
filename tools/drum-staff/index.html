@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🥁 Groove Staff</title>
+<style>
+  :root {
+    --bg: #16141f;
+    --panel: #201d2e;
+    --panel2: #2a2740;
+    --ink: #f2efe9;
+    --dim: #8d88a3;
+    --accent: #ffd54f;
+    --staff: #4a465f;
+    --playhead: #7ce7c0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 18px 22px 40px;
+  }
+  h1 { font-size: 1.35rem; margin: 0 0 2px; }
+  h1 .sub { font-size: .85rem; color: var(--dim); font-weight: 400; margin-left: 10px; }
+
+  .toprow, .transport, .presets {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    margin: 12px 0;
+  }
+  select, button {
+    background: var(--panel2); color: var(--ink);
+    border: 1px solid #3c3856; border-radius: 10px;
+    padding: 9px 14px; font-size: .95rem; cursor: pointer;
+  }
+  select:focus, button:focus { outline: 2px solid var(--accent); }
+  button:hover { border-color: var(--accent); }
+  button.active { background: var(--accent); color: #1d1a10; border-color: var(--accent); font-weight: 700; }
+
+  #playBtn {
+    font-size: 1.15rem; font-weight: 700; padding: 12px 26px;
+    background: var(--playhead); color: #0d2018; border: none;
+  }
+  #playBtn.playing { background: #ff8a80; color: #2b0d0a; }
+
+  .bpmBox { display: flex; align-items: center; gap: 6px; background: var(--panel); border-radius: 12px; padding: 6px 10px; }
+  .bpmBox .val { font-size: 1.3rem; font-weight: 800; min-width: 52px; text-align: center; color: var(--accent); }
+  .bpmBox button { padding: 6px 12px; font-weight: 700; }
+  .bpmBox input[type=range] { width: 130px; accent-color: var(--accent); }
+
+  label.tog { display: flex; align-items: center; gap: 6px; color: var(--dim); font-size: .9rem; cursor: pointer;
+    background: var(--panel); padding: 8px 12px; border-radius: 10px; }
+  label.tog input { accent-color: var(--accent); }
+  label.tog select { padding: 3px 6px; border-radius: 6px; }
+
+  .desc { color: var(--dim); font-size: .92rem; margin: 4px 0 10px; max-width: 900px; }
+  .loopinfo { color: var(--dim); font-size: .9rem; margin-left: 4px; }
+  .loopinfo b { color: var(--playhead); }
+
+  #staffWrap {
+    background: var(--panel); border-radius: 16px; padding: 18px 10px;
+    overflow-x: auto; position: relative;
+  }
+  #countFlash {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 6rem; font-weight: 900; color: var(--accent); pointer-events: none;
+    opacity: 0; transition: opacity .1s; text-shadow: 0 0 40px rgba(255,213,79,.4);
+  }
+  #countFlash.show { opacity: 1; }
+
+  svg text { font-family: inherit; }
+  .staffline { stroke: var(--staff); stroke-width: 1.4; }
+  .barline { stroke: var(--staff); stroke-width: 2.2; }
+  .countnum { fill: var(--ink); font-size: 17px; font-weight: 800; }
+  .countsub { fill: var(--dim); font-size: 13px; }
+  .lanelabel { fill: var(--ink); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .lanelabel.muted { fill: #56506e; text-decoration: line-through; }
+  .ledger { stroke: var(--staff); stroke-width: 1.4; }
+
+  .note .inner { transform-box: fill-box; transform-origin: center; }
+  .note { opacity: .42; }
+  .note.muted { opacity: .10; }
+  .note.hit { opacity: 1; }
+  .note.hit .inner { animation: pop .3s ease-out; }
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    18%  { transform: scale(1.75); }
+    100% { transform: scale(1); }
+  }
+  .note.hit .glow { opacity: .8; }
+  .glow { opacity: 0; transition: opacity .25s; }
+
+  #playhead { stroke: var(--playhead); stroke-width: 2.5; opacity: .85; }
+
+  footer { color: var(--dim); font-size: .85rem; margin-top: 18px; line-height: 1.5; }
+  footer code { background: var(--panel2); padding: 1px 6px; border-radius: 6px; }
+  kbd { background: var(--panel2); border: 1px solid #3c3856; border-radius: 5px; padding: 0 6px; font-size: .85em; }
+</style>
+</head>
+<body>
+
+<h1>🥁 Groove Staff <span class="sub">icons today, sheet music tomorrow</span></h1>
+
+<div class="toprow">
+  <select id="grooveSel" title="Pick a groove"></select>
+  <span style="color:var(--dim)">view:</span>
+  <button id="modeIcons" class="active">🥁 Icons</button>
+  <button id="modeBoth">🥁+♪ Both</button>
+  <button id="modeNotation">♪ Notation</button>
+  <span style="flex:1"></span>
+  <label class="tog">snare sound
+    <select id="snarePick"><option value="crispy">crispy</option><option value="clap">clapbox</option></select>
+  </label>
+</div>
+
+<div class="desc" id="grooveDesc"></div>
+
+<div class="transport">
+  <button id="playBtn">▶ Play</button>
+  <div class="bpmBox">
+    <button id="bpmDown">−5</button>
+    <span class="val" id="bpmVal">85</span>
+    <button id="bpmUp">+5</button>
+    <input type="range" id="bpmSlider" min="40" max="200" value="85">
+  </div>
+  <label class="tog"><input type="checkbox" id="countIn" checked> count-in</label>
+  <label class="tog"><input type="checkbox" id="ladder"> tempo ladder: +5 BPM every
+    <select id="ladderN"><option>2</option><option selected>4</option><option>8</option></select> loops
+  </label>
+  <span class="loopinfo">loop <b id="loopCount">0</b></span>
+</div>
+
+<div class="presets">
+  <span style="color:var(--dim)">layers:</span>
+  <button data-preset="ks">🦵 Kick + Snare</button>
+  <button data-preset="hats">+ Hats/Cymbals</button>
+  <button data-preset="all" class="active">Everything</button>
+  <span style="color:var(--dim); font-size:.85rem">(or click any lane name to mute it)</span>
+</div>
+
+<div id="staffWrap">
+  <div id="staffHost"></div>
+  <div id="countFlash"></div>
+</div>
+
+<footer>
+  <b>How this works:</b> every icon sits at its true position on a real drum staff — cymbals up top,
+  kick at the bottom. Icons pop when it's their moment. Switch to <i>Both</i> and then <i>Notation</i>
+  when you're ready: same groove, same spots, real noteheads. You're reading drum music.<br>
+  <b>Adding grooves:</b> show Claude a photo of sheet music → it gets transcribed into the library here.<br>
+  Keys: <kbd>space</kbd> play/stop · <kbd>↑</kbd>/<kbd>↓</kbd> BPM ±5
+</footer>
+
+<script>
+/* ============================================================
+   LANES — order + y-position = real drum notation staff placement
+   (top line of staff = y 0, each space = S/2 = 11px, S = 22)
+   ============================================================ */
+const S = 22;
+const LANES = [
+  { id:'cr', name:'Crash',     y:-1.5*S, color:'#fff176', cymbal:true,  ledger:true },
+  { id:'hh', name:'Hi-Hat',    y:-0.5*S, color:'#ffd54f', cymbal:true },
+  { id:'rd', name:'Ride',      y: 0,     color:'#c9a227', cymbal:true },
+  { id:'t1', name:'Hi Tom',    y: 0.5*S, color:'#42a5f5' },
+  { id:'t2', name:'Mid Tom',   y: 1.0*S, color:'#26a69a' },
+  { id:'sn', name:'Snare',     y: 1.5*S, color:'#ff80ab' },
+  { id:'ft', name:'Floor Tom', y: 2.5*S, color:'#7e57c2' },
+  { id:'k',  name:'Kick',      y: 3.5*S, color:'#e57373' },
+  { id:'hf', name:'HH Foot',   y: 4.5*S, color:'#ffb300', cymbal:true },
+];
+const laneById = Object.fromEntries(LANES.map(l => [l, l.id]).map(([l,id]) => [id, l]));
+
+/* ============================================================
+   GROOVE LIBRARY
+   steps: subdivisions per 4/4 bar (8 = 8th notes, 16 = 16ths)
+   lane strings: one char per step, length = steps * bars
+     '-' rest · 'o' hit · 'O' accented hit
+     hh lane only: 'x' closed · 'X' closed accent · 'o' OPEN hat
+   ============================================================ */
+const GROOVES = [
+  {
+    id:'money', name:'💰 The Money Beat', bpm: 85, steps: 8, bars: 1,
+    desc:'The most-played beat in pop history. Hats on every 8th, snare on 2 & 4, kick on 1 & 3. If you can play this, you can play ten thousand songs.',
+    lanes: { hh:'xxxxxxxx', sn:'--o---o-', k:'o---o---' }
+  },
+  {
+    id:'rock1', name:'🎸 Basic Rock (kick on the & of 3)', bpm: 85, steps: 8, bars: 1,
+    desc:'Money beat plus one extra kick on the "and" of 3. That one kick is what makes it groove.',
+    lanes: { hh:'xxxxxxxx', sn:'--o---o-', k:'o---oo--' }
+  },
+  {
+    id:'disco', name:'🪩 Four on the Floor', bpm: 100, steps: 8, bars: 1,
+    desc:'Kick on every beat, OPEN hats on every "and" (the halo icons). Disco lives forever.',
+    lanes: { hh:'xoxoxoxo', sn:'--o---o-', k:'o-o-o-o-' }
+  },
+  {
+    id:'sixteen', name:'🌊 16th-Note Hats', bpm: 75, steps: 16, bars: 1,
+    desc:'Hats doubled up to 16ths — count "1 e & a". Same kick and snare skeleton underneath. Start slow.',
+    lanes: { hh:'xxxxxxxxxxxxxxxx', sn:'----o-------o---', k:'o------o--o-----' }
+  },
+  {
+    id:'ridefoot', name:'🦶 Ride + Foot Hats', bpm: 80, steps: 8, bars: 1,
+    desc:'Right hand moves to the ride, LEFT FOOT keeps 2 & 4 on the hi-hat pedal. Four limbs, four jobs.',
+    lanes: { rd:'xxxxxxxx', sn:'--o---o-', k:'o---o---', hf:'--o---o-' }
+  },
+  {
+    id:'waterfall', name:'🌊🥁 Tom Waterfall (your first fill!)', bpm: 70, steps: 16, bars: 2,
+    desc:'Bar 1: groove. Bar 2: four 16ths on each drum, falling snare → hi tom → mid tom → floor tom, then CRASH back into bar 1. This is the shape of most fills you will ever play.',
+    lanes: {
+      cr:'o---------------' + '----------------',
+      hh:'--x-x-x-x-x-x-x-' + '----------------',
+      sn:'----o-------o---' + 'oooo------------',
+      t1:'----------------' + '----oooo--------',
+      t2:'----------------' + '--------oooo----',
+      ft:'----------------' + '------------oooo',
+      k :'o---------o-----' + 'o---------------'
+    }
+  },
+];
+
+/* ============================================================
+   AUDIO ENGINE — Web Audio synthesis, no samples, works offline
+   ============================================================ */
+let ctx = null, master = null;
+function ensureAudio() {
+  if (ctx) return;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -12; comp.ratio.value = 4;
+  master = ctx.createGain();
+  master.gain.value = 0.9;
+  master.connect(comp); comp.connect(ctx.destination);
+}
+function noiseBuffer() {
+  const buf = ctx.createBuffer(1, ctx.sampleRate * 1.5, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return buf;
+}
+let _noise = null;
+function noiseSrc() { if (!_noise) _noise = noiseBuffer(); const s = ctx.createBufferSource(); s.buffer = _noise; return s; }
+function env(t, peak, dur) { const g = ctx.createGain(); g.gain.setValueAtTime(peak, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur); return g; }
+
+function playKick(t, vel) {
+  const o = ctx.createOscillator(); o.type = 'sine';
+  o.frequency.setValueAtTime(155, t);
+  o.frequency.exponentialRampToValueAtTime(48, t + 0.1);
+  const g = env(t, 1.15 * vel, 0.5);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.5);
+  const n = noiseSrc(); const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 900;
+  const ng = env(t, 0.35 * vel, 0.02);
+  n.connect(hp); hp.connect(ng); ng.connect(master); n.start(t); n.stop(t + 0.03);
+}
+function playSnare(t, vel) {
+  if (ui.snarePick.value === 'clap') return playClap(t, vel);
+  const n = noiseSrc();
+  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 2000; bp.Q.value = 0.7;
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 500;
+  const ng = env(t, 0.85 * vel, 0.2);
+  n.connect(bp); bp.connect(hp); hp.connect(ng); ng.connect(master); n.start(t); n.stop(t + 0.25);
+  const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.setValueAtTime(196, t);
+  o.frequency.exponentialRampToValueAtTime(150, t + 0.06);
+  const og = env(t, 0.5 * vel, 0.09);
+  o.connect(og); og.connect(master); o.start(t); o.stop(t + 0.1);
+}
+function playClap(t, vel) {
+  for (const dt of [0, 0.011, 0.023]) {
+    const n = noiseSrc();
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1300; bp.Q.value = 1.6;
+    const g = env(t + dt, 0.6 * vel, dt < 0.02 ? 0.03 : 0.16);
+    n.connect(bp); bp.connect(g); g.connect(master); n.start(t + dt); n.stop(t + dt + 0.2);
+  }
+}
+function metallic(t, vel, dur, hpF, gainMul) {
+  // classic 6-square-oscillator cymbal recipe
+  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 10000;
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = hpF;
+  const g = env(t, gainMul * vel, dur);
+  bp.connect(hp); hp.connect(g); g.connect(master);
+  for (const r of [2, 3, 4.16, 5.43, 6.79, 8.21]) {
+    const o = ctx.createOscillator(); o.type = 'square'; o.frequency.value = 40 * r * 2;
+    o.connect(bp); o.start(t); o.stop(t + dur + 0.05);
+  }
+}
+function playHatClosed(t, vel) { metallic(t, vel, 0.05, 7000, 0.35); }
+function playHatOpen(t, vel)   { metallic(t, vel, 0.4,  6500, 0.32); }
+function playHatFoot(t, vel)   { metallic(t, vel, 0.06, 5500, 0.22); }
+function playRide(t, vel) {
+  metallic(t, vel, 0.7, 5500, 0.14);
+  const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = 940;
+  const g = env(t, 0.16 * vel, 0.7);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.75);
+}
+function playCrash(t, vel) {
+  const n = noiseSrc();
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 3200;
+  const g = env(t, 0.55 * vel, 1.4);
+  n.connect(hp); hp.connect(g); g.connect(master); n.start(t); n.stop(t + 1.5);
+  metallic(t, vel, 1.1, 4500, 0.18);
+}
+function playTom(t, vel, f0, f1, dur) {
+  const o = ctx.createOscillator(); o.type = 'sine';
+  o.frequency.setValueAtTime(f0, t);
+  o.frequency.exponentialRampToValueAtTime(f1, t + dur * 0.7);
+  const g = env(t, 0.9 * vel, dur);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.05);
+  const n = noiseSrc(); const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f0 * 3;
+  const ng = env(t, 0.15 * vel, 0.03);
+  n.connect(bp); bp.connect(ng); ng.connect(master); n.start(t); n.stop(t + 0.05);
+}
+function playClick(t, accent) {
+  const o = ctx.createOscillator(); o.type = 'square'; o.frequency.value = accent ? 1900 : 1300;
+  const g = env(t, accent ? 0.35 : 0.22, 0.035);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.05);
+}
+const VOICES = {
+  cr: (t, v) => playCrash(t, v),
+  hh: (t, v, ch) => (ch === 'o' ? playHatOpen(t, v) : playHatClosed(t, v)),
+  rd: (t, v) => playRide(t, v),
+  t1: (t, v) => playTom(t, v, 240, 150, 0.3),
+  t2: (t, v) => playTom(t, v, 185, 115, 0.35),
+  sn: (t, v) => playSnare(t, v),
+  ft: (t, v) => playTom(t, v, 135, 82, 0.45),
+  k:  (t, v) => playKick(t, v),
+  hf: (t, v) => playHatFoot(t, v),
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  groove: GROOVES[0],
+  mode: 'icons',            // icons | both | notation
+  bpm: 85,
+  muted: new Set(),
+  playing: false,
+  loopCount: 0,
+};
+const ui = {};
+for (const id of ['grooveSel','grooveDesc','playBtn','bpmVal','bpmSlider','bpmDown','bpmUp',
+                  'countIn','ladder','ladderN','loopCount','staffHost','countFlash','snarePick',
+                  'modeIcons','modeBoth','modeNotation'])
+  ui[id] = document.getElementById(id);
+
+/* ============================================================
+   RENDERING — one SVG staff, re-rendered on groove/mode change
+   ============================================================ */
+const GUTTER = 118, OFFSET_Y = 96, CELL_H_PAD = 46;
+let colEls = [];   // colEls[step] = [note <g> elements]
+let cellW = 40, totalSteps = 8;
+
+function iconSvg(lane, ch) {
+  // small kit-piece icons, centered on 0,0
+  const c = lane.color;
+  switch (lane.id) {
+    case 'cr': return `<ellipse rx="13" ry="4.5" fill="${c}" transform="rotate(-14)"/><circle r="1.8" fill="#00000055"/>`;
+    case 'hh': {
+      const open = ch === 'o';
+      return `<ellipse cy="${open ? -4 : -2.2}" rx="11" ry="3.4" fill="${c}"/>
+              <ellipse cy="${open ? 3 : 1.2}" rx="11" ry="3.4" fill="${c}" opacity=".8"/>
+              <line x1="0" y1="${open ? -8 : -6}" x2="0" y2="-11" stroke="${c}" stroke-width="1.5"/>`;
+    }
+    case 'rd': return `<ellipse rx="14" ry="5" fill="${c}"/><circle r="3" fill="#00000044"/>`;
+    case 't1': return `<circle r="8.5" fill="${c}"/><circle r="8.5" fill="none" stroke="#ffffff55" stroke-width="1.6"/>`;
+    case 't2': return `<circle r="9.5" fill="${c}"/><circle r="9.5" fill="none" stroke="#ffffff55" stroke-width="1.6"/>`;
+    case 'sn': return `<circle r="9" fill="${c}"/><circle r="9" fill="none" stroke="#ffffffaa" stroke-width="2"/><line x1="-6" y1="0" x2="6" y2="0" stroke="#ffffff88" stroke-width="1.4"/>`;
+    case 'ft': return `<circle r="10.5" fill="${c}"/><circle r="10.5" fill="none" stroke="#ffffff55" stroke-width="1.6"/>`;
+    case 'k':  return `<circle r="12" fill="${c}"/><circle r="12" fill="none" stroke="#ffffff66" stroke-width="2.2"/><circle r="4" fill="#ffffff33"/>`;
+    case 'hf': return `<path d="M -7 6 L 0 -6 L 7 6 Z" fill="${c}"/><line x1="-8" y1="7.5" x2="8" y2="7.5" stroke="${c}" stroke-width="2"/>`;
+  }
+}
+function noteheadSvg(lane, ch, inkColor) {
+  const c = inkColor;
+  if (lane.cymbal) {
+    let s = `<line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="${c}" stroke-width="2.4"/>
+             <line x1="-5.5" y1="5.5" x2="5.5" y2="-5.5" stroke="${c}" stroke-width="2.4"/>`;
+    if (lane.id === 'hh' && ch === 'o')
+      s += `<circle cx="0" cy="-13" r="3.4" fill="none" stroke="${c}" stroke-width="1.8"/>`;
+    return s;
+  }
+  return `<ellipse rx="6.8" ry="5" fill="${c}" transform="rotate(-18)"/>`;
+}
+function countLabels(steps) {
+  if (steps === 8)  return ['1','&','2','&','3','&','4','&'];
+  if (steps === 16) return ['1','e','&','a','2','e','&','a','3','e','&','a','4','e','&','a'];
+  return Array.from({length: steps}, (_, i) => String(i + 1));
+}
+
+function render() {
+  const g = state.groove;
+  totalSteps = g.steps * g.bars;
+  cellW = g.steps <= 8 ? 58 : 40;
+  const barW = cellW * g.steps;
+  const width = GUTTER + barW * g.bars + 24;
+  const height = OFFSET_Y + 4.5 * S + CELL_H_PAD;
+  const used = LANES.filter(l => g.lanes[l.id] && /[^-]/.test(g.lanes[l.id]));
+  const labels = countLabels(g.steps);
+  let s = `<svg id="staffSvg" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">`;
+
+  // 5 staff lines (top line = OFFSET_Y)
+  for (let i = 0; i < 5; i++)
+    s += `<line class="staffline" x1="${GUTTER - 26}" y1="${OFFSET_Y + i * S}" x2="${width - 12}" y2="${OFFSET_Y + i * S}"/>`;
+  // barlines
+  for (let b = 0; b <= g.bars; b++) {
+    const x = GUTTER + b * barW - (b === 0 ? 13 : cellW / 2);
+    s += `<line class="barline" x1="${x}" y1="${OFFSET_Y}" x2="${x}" y2="${OFFSET_Y + 4 * S}"/>`;
+  }
+  // count row
+  for (let i = 0; i < totalSteps; i++) {
+    const lb = labels[i % g.steps];
+    const x = GUTTER + i * cellW;
+    const main = /^\d/.test(lb);
+    s += `<text class="${main ? 'countnum' : 'countsub'}" x="${x}" y="30" text-anchor="middle">${lb}</text>`;
+    // faint beat guide lines under the numbers
+    if (main) s += `<line x1="${x}" y1="38" x2="${x}" y2="${OFFSET_Y - 40}" stroke="#3c3856" stroke-width="1" stroke-dasharray="2 4"/>`;
+  }
+  // lane labels — spread apart so close staff positions don't overlap,
+  // with a thin leader line back to the true lane height
+  const labelYs = [];
+  for (const lane of used) {
+    let ly = OFFSET_Y + lane.y;
+    if (labelYs.length && ly < labelYs[labelYs.length - 1] + 15) ly = labelYs[labelYs.length - 1] + 15;
+    labelYs.push(ly);
+  }
+  used.forEach((lane, idx) => {
+    const y = OFFSET_Y + lane.y, ly = labelYs[idx];
+    const mutedCls = state.muted.has(lane.id) ? ' muted' : '';
+    s += `<text class="lanelabel${mutedCls}" data-lane="${lane.id}" x="${GUTTER - 40}" y="${ly + 4}" text-anchor="end">${lane.name}</text>`;
+    if (Math.abs(ly - y) > 2)
+      s += `<line x1="${GUTTER - 36}" y1="${ly}" x2="${GUTTER - 22}" y2="${y}" stroke="#56506e" stroke-width="1"/>`;
+  });
+  // notes
+  for (const lane of used) {
+    const y = OFFSET_Y + lane.y;
+    const str = g.lanes[lane.id];
+    for (let i = 0; i < totalSteps; i++) {
+      const ch = str[i];
+      if (!ch || ch === '-') continue;
+      const x = GUTTER + i * cellW;
+      const accent = ch === 'O' || ch === 'X';
+      const chL = ch.toLowerCase() === 'x' ? 'x' : 'o';
+      let inner = '';
+      // ledger line for crash (it lives above the staff)
+      if (lane.ledger && state.mode !== 'icons')
+        inner += `<line class="ledger" x1="-11" y1="${S * 0.5}" x2="11" y2="${S * 0.5}"/>`;
+      if (state.mode === 'icons') {
+        inner += iconSvg(lane, lane.id === 'hh' ? ch : chL);
+      } else if (state.mode === 'notation') {
+        inner += noteheadSvg(lane, lane.id === 'hh' ? ch : chL, 'var(--ink)');
+      } else { // both
+        inner += `<g transform="translate(-17,-13) scale(.5)" opacity=".65">${iconSvg(lane, lane.id === 'hh' ? ch : chL)}</g>`;
+        inner += noteheadSvg(lane, lane.id === 'hh' ? ch : chL, lane.color);
+      }
+      if (accent) inner += `<text x="0" y="-15" text-anchor="middle" font-size="13" font-weight="900" fill="${lane.color}">&gt;</text>`;
+      const mcls = state.muted.has(lane.id) ? ' muted' : '';
+      s += `<g class="note${mcls}" data-step="${i}" data-lane="${lane.id}" transform="translate(${x},${y})">
+              <circle class="glow" r="17" fill="${lane.color}" opacity="0"/>
+              <g class="inner">${inner}</g>
+            </g>`;
+    }
+  }
+  s += `<line id="playhead" x1="${GUTTER - 13}" y1="${OFFSET_Y - 34}" x2="${GUTTER - 13}" y2="${OFFSET_Y + 4 * S + 22}" visibility="hidden"/>`;
+  s += `</svg>`;
+  ui.staffHost.innerHTML = s;
+
+  colEls = Array.from({length: totalSteps}, () => []);
+  ui.staffHost.querySelectorAll('.note').forEach(el => colEls[+el.dataset.step].push(el));
+  ui.staffHost.querySelectorAll('.lanelabel').forEach(el =>
+    el.addEventListener('click', () => toggleMute(el.dataset.lane)));
+}
+
+function toggleMute(id) {
+  state.muted.has(id) ? state.muted.delete(id) : state.muted.add(id);
+  refreshMuteStyles();
+}
+function refreshMuteStyles() {
+  ui.staffHost.querySelectorAll('.lanelabel').forEach(el =>
+    el.classList.toggle('muted', state.muted.has(el.dataset.lane)));
+  ui.staffHost.querySelectorAll('.note').forEach(el =>
+    el.classList.toggle('muted', state.muted.has(el.dataset.lane)));
+  document.querySelectorAll('[data-preset]').forEach(b => b.classList.remove('active'));
+}
+
+/* ============================================================
+   SCHEDULER — lookahead clock, visual events synced to audio
+   ============================================================ */
+const LOOKAHEAD = 0.14, TICK = 25;
+let timerId = null, nextNoteTime = 0, currentStep = 0, countInLeft = 0;
+let visualQueue = [];   // {t, step} or {t, count}
+let lastVis = { step: 0, t: 0, dur: 0.2 };
+
+function stepDur() { return (240 / state.bpm) / state.groove.steps; }
+
+function scheduler() {
+  while (nextNoteTime < ctx.currentTime + LOOKAHEAD) {
+    if (countInLeft > 0) {
+      const beat = 5 - countInLeft;
+      playClick(nextNoteTime, beat === 1);
+      visualQueue.push({ t: nextNoteTime, count: beat });
+      nextNoteTime += 60 / state.bpm;
+      countInLeft--;
+      continue;
+    }
+    scheduleStep(currentStep, nextNoteTime);
+    visualQueue.push({ t: nextNoteTime, step: currentStep, dur: stepDur() });
+    nextNoteTime += stepDur();
+    currentStep++;
+    if (currentStep >= totalSteps) {
+      currentStep = 0;
+      state.loopCount++;
+      ui.loopCount.textContent = state.loopCount;
+      if (ui.ladder.checked && state.loopCount % +ui.ladderN.value === 0)
+        setBpm(state.bpm + 5);
+    }
+  }
+}
+function scheduleStep(i, t) {
+  const g = state.groove;
+  for (const lane of LANES) {
+    const str = g.lanes[lane.id];
+    if (!str) continue;
+    const ch = str[i];
+    if (!ch || ch === '-') continue;
+    if (state.muted.has(lane.id)) continue;
+    const vel = (ch === 'O' || ch === 'X') ? 1.0 : 0.75;
+    VOICES[lane.id](t, vel, ch.toLowerCase() === 'o' && lane.id === 'hh' ? 'o' : ch);
+  }
+}
+function popStep(i) {
+  for (const el of colEls[i] || []) {
+    el.classList.remove('hit');
+    void el.getBoundingClientRect(); // restart animation
+    el.classList.add('hit');
+    setTimeout(() => el.classList.remove('hit'), 320);
+  }
+}
+let countFlashTimer = null;
+function flashCount(n) {
+  ui.countFlash.textContent = n;
+  ui.countFlash.classList.add('show');
+  clearTimeout(countFlashTimer);
+  countFlashTimer = setTimeout(() => ui.countFlash.classList.remove('show'), 300);
+}
+
+function visualLoop() {
+  if (!state.playing) return;
+  const now = ctx.currentTime;
+  while (visualQueue.length && visualQueue[0].t <= now + 0.005) {
+    const ev = visualQueue.shift();
+    if (ev.count !== undefined) flashCount(ev.count);
+    else { popStep(ev.step); lastVis = { step: ev.step, t: ev.t, dur: ev.dur }; }
+  }
+  const ph = document.getElementById('playhead');
+  if (ph) {
+    if (countInLeft > 0 && lastVis.t === 0) ph.setAttribute('visibility', 'hidden');
+    else {
+      ph.setAttribute('visibility', 'visible');
+      const frac = Math.min(1, Math.max(0, (now - lastVis.t) / lastVis.dur));
+      const x = GUTTER + (lastVis.step + frac) * cellW;
+      ph.setAttribute('x1', x); ph.setAttribute('x2', x);
+    }
+  }
+  requestAnimationFrame(visualLoop);
+}
+
+function play() {
+  ensureAudio();
+  if (ctx.state === 'suspended') ctx.resume();
+  state.playing = true;
+  state.loopCount = 0;
+  ui.loopCount.textContent = 0;
+  currentStep = 0;
+  countInLeft = ui.countIn.checked ? 4 : 0;
+  nextNoteTime = ctx.currentTime + 0.1;
+  visualQueue = [];
+  lastVis = { step: 0, t: 0, dur: stepDur() };
+  timerId = setInterval(scheduler, TICK);
+  ui.playBtn.textContent = '⏸ Stop';
+  ui.playBtn.classList.add('playing');
+  requestAnimationFrame(visualLoop);
+}
+function stop() {
+  state.playing = false;
+  clearInterval(timerId);
+  visualQueue = [];
+  ui.playBtn.textContent = '▶ Play';
+  ui.playBtn.classList.remove('playing');
+  const ph = document.getElementById('playhead');
+  if (ph) ph.setAttribute('visibility', 'hidden');
+  ui.countFlash.classList.remove('show');
+}
+
+/* ============================================================
+   UI WIRING
+   ============================================================ */
+function setBpm(v) {
+  state.bpm = Math.max(40, Math.min(200, v));
+  ui.bpmVal.textContent = state.bpm;
+  ui.bpmSlider.value = state.bpm;
+}
+function setMode(m) {
+  state.mode = m;
+  ui.modeIcons.classList.toggle('active', m === 'icons');
+  ui.modeBoth.classList.toggle('active', m === 'both');
+  ui.modeNotation.classList.toggle('active', m === 'notation');
+  render(); refreshMuteStyles();
+}
+function setGroove(id) {
+  const wasPlaying = state.playing;
+  if (wasPlaying) stop();
+  state.groove = GROOVES.find(g => g.id === id) || GROOVES[0];
+  ui.grooveSel.value = state.groove.id;
+  setBpm(state.groove.bpm);
+  ui.grooveDesc.textContent = state.groove.desc;
+  render(); refreshMuteStyles();
+  if (wasPlaying) play();
+}
+
+GROOVES.forEach(g => {
+  const o = document.createElement('option');
+  o.value = g.id; o.textContent = g.name;
+  ui.grooveSel.appendChild(o);
+});
+ui.grooveSel.addEventListener('change', e => setGroove(e.target.value));
+ui.playBtn.addEventListener('click', () => state.playing ? stop() : play());
+ui.bpmDown.addEventListener('click', () => setBpm(state.bpm - 5));
+ui.bpmUp.addEventListener('click', () => setBpm(state.bpm + 5));
+ui.bpmSlider.addEventListener('input', e => setBpm(+e.target.value));
+ui.modeIcons.addEventListener('click', () => setMode('icons'));
+ui.modeBoth.addEventListener('click', () => setMode('both'));
+ui.modeNotation.addEventListener('click', () => setMode('notation'));
+
+document.querySelectorAll('[data-preset]').forEach(btn => btn.addEventListener('click', () => {
+  const p = btn.dataset.preset;
+  state.muted.clear();
+  if (p === 'ks') for (const l of LANES) { if (l.id !== 'k' && l.id !== 'sn') state.muted.add(l.id); }
+  if (p === 'hats') for (const l of LANES) { if (['t1','t2','ft'].includes(l.id)) state.muted.add(l.id); }
+  refreshMuteStyles();
+  document.querySelectorAll('[data-preset]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}));
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); state.playing ? stop() : play(); }
+  if (e.code === 'ArrowUp') { e.preventDefault(); setBpm(state.bpm + 5); }
+  if (e.code === 'ArrowDown') { e.preventDefault(); setBpm(state.bpm - 5); }
+});
+
+setGroove('money');
+</script>
+</body>
+</html>
