@@ -152,6 +152,15 @@
   <span style="color:var(--dim); font-size:.85rem">(or click any lane name to mute it)</span>
 </div>
 
+<div class="toprow">
+  <button id="pageToggle" class="active">📄 One bar at a time</button>
+  <span id="barNav" style="display:none; align-items:center; gap:8px;">
+    <button id="barPrev">‹</button>
+    <span id="barPos" style="color:var(--dim); min-width:70px; text-align:center;">bar 1 / 1</span>
+    <button id="barNext">›</button>
+  </span>
+</div>
+
 <div id="staffWrap">
   <div id="staffHost"></div>
   <div id="countFlash"></div>
@@ -395,6 +404,8 @@ const VOICES = {
 const state = {
   groove: GROOVES[0],
   mode: 'icons',            // icons | both | notation
+  view: 'page',             // page (one bar at a time) | chart (whole thing)
+  viewBar: 0,
   bpm: 85,
   muted: new Set(),
   playing: false,
@@ -403,7 +414,8 @@ const state = {
 const ui = {};
 for (const id of ['grooveSel','grooveDesc','playBtn','bpmVal','bpmSlider','bpmDown','bpmUp',
                   'countIn','ladder','ladderN','loopCount','staffHost','countFlash','snarePick',
-                  'modeIcons','modeBoth','modeNotation','comboBeat','comboFill','comboShape','comboBuild'])
+                  'modeIcons','modeBoth','modeNotation','comboBeat','comboFill','comboShape','comboBuild',
+                  'pageToggle','barNav','barPrev','barNext','barPos'])
   ui[id] = document.getElementById(id);
 
 /* ============================================================
@@ -455,7 +467,12 @@ function render() {
   totalSteps = g.steps * g.bars;
   cellW = g.steps <= 8 ? 58 : 40;
   const barW = cellW * g.steps;
-  const width = GUTTER + barW * g.bars + 24;
+  // page mode shows one bar at a time; chart mode shows the whole thing
+  const paged = state.view === 'page';
+  if (state.viewBar >= g.bars) state.viewBar = 0;
+  const winStart = paged ? state.viewBar * g.steps : 0;
+  const winSteps = paged ? g.steps : totalSteps;
+  const width = GUTTER + cellW * winSteps + 24;
   const height = OFFSET_Y + 4.5 * S + CELL_H_PAD;
   const used = LANES.filter(l => g.lanes[l.id] && /[^-]/.test(g.lanes[l.id]));
   const labels = countLabels(g.steps);
@@ -465,14 +482,15 @@ function render() {
   for (let i = 0; i < 5; i++)
     s += `<line class="staffline" x1="${GUTTER - 26}" y1="${OFFSET_Y + i * S}" x2="${width - 12}" y2="${OFFSET_Y + i * S}"/>`;
   // barlines
-  for (let b = 0; b <= g.bars; b++) {
+  const nBarlines = paged ? 1 : g.bars;
+  for (let b = 0; b <= nBarlines; b++) {
     const x = GUTTER + b * barW - (b === 0 ? 13 : cellW / 2);
     s += `<line class="barline" x1="${x}" y1="${OFFSET_Y}" x2="${x}" y2="${OFFSET_Y + 4 * S}"/>`;
   }
   // count row
-  for (let i = 0; i < totalSteps; i++) {
+  for (let i = winStart; i < winStart + winSteps; i++) {
     const lb = labels[i % g.steps];
-    const x = GUTTER + i * cellW;
+    const x = GUTTER + (i - winStart) * cellW;
     const main = /^\d/.test(lb);
     s += `<text class="${main ? 'countnum' : 'countsub'}" x="${x}" y="30" text-anchor="middle">${lb}</text>`;
     // faint beat guide lines under the numbers
@@ -497,10 +515,10 @@ function render() {
   for (const lane of used) {
     const y = OFFSET_Y + lane.y;
     const str = g.lanes[lane.id];
-    for (let i = 0; i < totalSteps; i++) {
+    for (let i = winStart; i < winStart + winSteps; i++) {
       const ch = str[i];
       if (!ch || ch === '-') continue;
-      const x = GUTTER + i * cellW;
+      const x = GUTTER + (i - winStart) * cellW;
       const accent = ch === 'O' || ch === 'X';
       const chL = ch.toLowerCase() === 'x' ? 'x' : 'o';
       let inner = '';
@@ -531,6 +549,11 @@ function render() {
   ui.staffHost.querySelectorAll('.note').forEach(el => colEls[+el.dataset.step].push(el));
   ui.staffHost.querySelectorAll('.lanelabel').forEach(el =>
     el.addEventListener('click', () => toggleMute(el.dataset.lane)));
+
+  // bar navigation strip
+  const showNav = paged && g.bars > 1;
+  ui.barNav.style.display = showNav ? 'inline-flex' : 'none';
+  ui.barPos.textContent = `bar ${state.viewBar + 1} / ${g.bars}`;
 }
 
 function toggleMute(id) {
@@ -563,13 +586,13 @@ function scheduler() {
     if (countInLeft > 0) {
       const beat = 5 - countInLeft;
       playClick(nextNoteTime, beat === 1);
-      visualQueue.push({ t: nextNoteTime, count: beat });
+      if (!document.hidden) visualQueue.push({ t: nextNoteTime, count: beat });
       nextNoteTime += 60 / state.bpm;
       countInLeft--;
       continue;
     }
     scheduleStep(currentStep, nextNoteTime);
-    visualQueue.push({ t: nextNoteTime, step: currentStep, dur: stepDur() });
+    if (!document.hidden) visualQueue.push({ t: nextNoteTime, step: currentStep, dur: stepDur() });
     nextNoteTime += stepDur();
     currentStep++;
     if (currentStep >= totalSteps) {
@@ -615,7 +638,16 @@ function visualLoop() {
   while (visualQueue.length && visualQueue[0].t <= now + 0.005) {
     const ev = visualQueue.shift();
     if (ev.count !== undefined) flashCount(ev.count);
-    else { popStep(ev.step); lastVis = { step: ev.step, t: ev.t, dur: ev.dur }; }
+    else {
+      // page mode: flip to the new bar the moment it starts
+      const bar = Math.floor(ev.step / state.groove.steps);
+      if (state.view === 'page' && bar !== state.viewBar) {
+        state.viewBar = bar;
+        render(); refreshMuteStyles();
+      }
+      popStep(ev.step);
+      lastVis = { step: ev.step, t: ev.t, dur: ev.dur };
+    }
   }
   const ph = document.getElementById('playhead');
   if (ph) {
@@ -623,12 +655,15 @@ function visualLoop() {
     else {
       ph.setAttribute('visibility', 'visible');
       const frac = Math.min(1, Math.max(0, (now - lastVis.t) / lastVis.dur));
-      const x = GUTTER + (lastVis.step + frac) * cellW;
+      const winStart = state.view === 'page' ? state.viewBar * state.groove.steps : 0;
+      const x = GUTTER + Math.max(0, lastVis.step - winStart + frac) * cellW;
       ph.setAttribute('x1', x); ph.setAttribute('x2', x);
-      // keep the playhead in view on wide (multi-bar) charts
-      const wrap = document.getElementById('staffWrap');
-      if (x > wrap.scrollLeft + wrap.clientWidth - 80 || x < wrap.scrollLeft + 20)
-        wrap.scrollLeft = Math.max(0, x - 150);
+      if (state.view !== 'page') {
+        // keep the playhead in view on wide (multi-bar) charts
+        const wrap = document.getElementById('staffWrap');
+        if (x > wrap.scrollLeft + wrap.clientWidth - 80 || x < wrap.scrollLeft + 20)
+          wrap.scrollLeft = Math.max(0, x - 150);
+      }
     }
   }
   requestAnimationFrame(visualLoop);
@@ -641,6 +676,10 @@ function play() {
   state.loopCount = 0;
   ui.loopCount.textContent = 0;
   currentStep = 0;
+  if (state.view === 'page' && state.viewBar !== 0) {
+    state.viewBar = 0;
+    render(); refreshMuteStyles();
+  }
   countInLeft = ui.countIn.checked ? 4 : 0;
   nextNoteTime = ctx.currentTime + 0.1;
   visualQueue = [];
@@ -681,6 +720,7 @@ function loadGroove(g) {
   const wasPlaying = state.playing;
   if (wasPlaying) stop();
   state.groove = g;
+  state.viewBar = 0;
   if (g.id === '_combo') {
     let opt = ui.grooveSel.querySelector('option[value="_combo"]');
     if (!opt) { opt = document.createElement('option'); opt.value = '_combo'; ui.grooveSel.appendChild(opt); }
@@ -763,6 +803,20 @@ FILLS.forEach(f => {
   ui.comboFill.appendChild(o);
 });
 ui.comboBuild.addEventListener('click', buildCombo);
+ui.pageToggle.addEventListener('click', () => {
+  state.view = state.view === 'page' ? 'chart' : 'page';
+  ui.pageToggle.classList.toggle('active', state.view === 'page');
+  ui.pageToggle.textContent = state.view === 'page' ? '📄 One bar at a time' : '📜 Whole chart';
+  render(); refreshMuteStyles();
+});
+ui.barPrev.addEventListener('click', () => {
+  state.viewBar = Math.max(0, state.viewBar - 1);
+  render(); refreshMuteStyles();
+});
+ui.barNext.addEventListener('click', () => {
+  state.viewBar = Math.min(state.groove.bars - 1, state.viewBar + 1);
+  render(); refreshMuteStyles();
+});
 ui.playBtn.addEventListener('click', () => state.playing ? stop() : play());
 ui.bpmDown.addEventListener('click', () => setBpm(state.bpm - 5));
 ui.bpmUp.addEventListener('click', () => setBpm(state.bpm + 5));
